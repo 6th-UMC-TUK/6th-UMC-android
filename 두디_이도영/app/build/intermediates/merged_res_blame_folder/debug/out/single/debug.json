@@ -4,16 +4,16 @@
         "source": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-main-33:/drawable/img_album_exp.png"
     },
     {
-        "merged": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-merged_res-31:/mipmap-xxxhdpi_ic_launcher.webp.flat",
-        "source": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-main-33:/mipmap-xxxhdpi/ic_launcher.webp"
+        "merged": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-merged_res-31:/drawable_ic_main_twitter.png.flat",
+        "source": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-main-33:/drawable/ic_main_twitter.png"
     },
     {
         "merged": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-merged_res-31:/drawable_ic_bottom_search_select.png.flat",
         "source": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-main-33:/drawable/ic_bottom_search_select.png"
     },
     {
-        "merged": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-merged_res-31:/drawable_ic_main_twitter.png.flat",
-        "source": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-main-33:/drawable/ic_main_twitter.png"
+        "merged": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-merged_res-31:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-main-33:/mipmap-xxxhdpi/ic_launcher.webp"
     },
     {
         "merged": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-merged_res-31:/layout_fragment_search.xml.flat",
@@ -56,16 +56,12 @@
         "source": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-main-33:/mipmap-mdpi/ic_launcher.webp"
     },
     {
-        "merged": "com.example.flo_clone.app-merged_res-31:/drawable_btm_color_selector.xml.flat",
-        "source": "com.example.flo_clone.app-main-33:/drawable/btm_color_selector.xml"
+        "merged": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-merged_res-31:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-main-33:/mipmap-xhdpi/ic_launcher_round.webp"
     },
     {
         "merged": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-merged_res-31:/layout_fragment_look.xml.flat",
         "source": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-main-33:/layout/fragment_look.xml"
-    },
-    {
-        "merged": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-merged_res-31:/mipmap-xhdpi_ic_launcher_round.webp.flat",
-        "source": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-main-33:/mipmap-xhdpi/ic_launcher_round.webp"
     },
     {
         "merged": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-merged_res-31:/layout_fragment_locker.xml.flat",
@@ -152,6 +148,14 @@
         "source": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-main-33:/drawable/btn_miniplayer_previous.png"
     },
     {
+        "merged": "com.example.flo_clone.app-merged_res-31:/layout_fragment_home.xml.flat",
+        "source": "com.example.flo_clone.app-main-33:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "com.example.flo_clone.app-merged_res-31:/layout_fragment_locker.xml.flat",
+        "source": "com.example.flo_clone.app-main-33:/layout/fragment_locker.xml"
+    },
+    {
         "merged": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-merged_res-31:/drawable_ic_bottom_home_select.png.flat",
         "source": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-main-33:/drawable/ic_bottom_home_select.png"
     },
@@ -164,12 +168,20 @@
         "source": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-main-33:/drawable/ic_launcher_background.xml"
     },
     {
+        "merged": "com.example.flo_clone.app-merged_res-31:/layout_fragment_look.xml.flat",
+        "source": "com.example.flo_clone.app-main-33:/layout/fragment_look.xml"
+    },
+    {
         "merged": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-merged_res-31:/drawable_ic_bottom_locker_no_select.png.flat",
         "source": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-main-33:/drawable/ic_bottom_locker_no_select.png"
     },
     {
         "merged": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-merged_res-31:/drawable_discovery_banner_aos.jpg.flat",
         "source": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-main-33:/drawable/discovery_banner_aos.jpg"
+    },
+    {
+        "merged": "com.example.flo_clone.app-merged_res-31:/layout_fragment_search.xml.flat",
+        "source": "com.example.flo_clone.app-main-33:/layout/fragment_search.xml"
     },
     {
         "merged": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-merged_res-31:/drawable_ic_main_youtube.png.flat",
@@ -200,8 +212,8 @@
         "source": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-main-33:/drawable/btn_main_arrow_more.png"
     },
     {
-        "merged": "com.example.flo_clone.app-merged_res-31:/layout_activity_main.xml.flat",
-        "source": "com.example.flo_clone.app-main-33:/layout/activity_main.xml"
+        "merged": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-merged_res-31:/drawable_btm_color_selector.xml.flat",
+        "source": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-main-33:/drawable/btm_color_selector.xml"
     },
     {
         "merged": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-merged_res-31:/drawable_img_home_viewpager_exp2.png.flat",

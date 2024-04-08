@@ -36,6 +36,16 @@ drawable img_potcast_exp
 drawable img_video_exp
 drawable widget_black_play
 id homeFragment
+id home_pannel_album_img_iv
+id home_pannel_album_info_tv
+id home_pannel_album_singer_tv
+id home_pannel_album_title_tv
+id home_pannel_backgound_iv
+id home_pannel_btn_nugu_iv
+id home_pannel_btn_play_iv
+id home_pannel_btn_setting_iv
+id home_pannel_btn_ticket_iv
+id home_pannel_title_tv
 id lockerFragment
 id lookFragment
 id main_bnv

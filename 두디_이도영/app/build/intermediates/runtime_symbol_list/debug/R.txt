@@ -3321,6 +3321,16 @@ int id hideable 0x7f0800d1
 int id home 0x7f0800d2
 int id homeAsUp 0x7f0800d3
 int id homeFragment 0x7f0800d4
+int id home_pannel_album_img_iv 0x7f0801f9
+int id home_pannel_album_info_tv 0x7f0801fa
+int id home_pannel_album_singer_tv 0x7f0801fb
+int id home_pannel_album_title_tv 0x7f0801fc
+int id home_pannel_backgound_iv 0x7f0801fd
+int id home_pannel_btn_nugu_iv 0x7f0801fe
+int id home_pannel_btn_play_iv 0x7f0801ff
+int id home_pannel_btn_setting_iv 0x7f080200
+int id home_pannel_btn_ticket_iv 0x7f080201
+int id home_pannel_title_tv 0x7f080202
 int id honorRequest 0x7f0800d5
 int id horizontal_only 0x7f0800d6
 int id icon 0x7f0800d7
