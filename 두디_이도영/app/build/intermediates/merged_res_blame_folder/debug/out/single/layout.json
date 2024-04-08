@@ -1,19 +1,23 @@
 [
     {
-        "merged": "com.example.flo_clone.app-mergeDebugResources-30:/layout/fragment_home.xml",
-        "source": "com.example.flo_clone.app-main-33:/layout/fragment_home.xml"
+        "merged": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-mergeDebugResources-30:/layout/activity_main.xml",
+        "source": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-main-33:/layout/activity_main.xml"
     },
     {
-        "merged": "com.example.flo_clone.app-mergeDebugResources-30:/layout/fragment_search.xml",
-        "source": "com.example.flo_clone.app-main-33:/layout/fragment_search.xml"
+        "merged": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-mergeDebugResources-30:/layout/fragment_look.xml",
+        "source": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-main-33:/layout/fragment_look.xml"
     },
     {
-        "merged": "com.example.flo_clone.app-mergeDebugResources-30:/layout/fragment_look.xml",
-        "source": "com.example.flo_clone.app-main-33:/layout/fragment_look.xml"
+        "merged": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-mergeDebugResources-30:/layout/fragment_home.xml",
+        "source": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-main-33:/layout/fragment_home.xml"
     },
     {
-        "merged": "com.example.flo_clone.app-mergeDebugResources-30:/layout/fragment_locker.xml",
-        "source": "com.example.flo_clone.app-main-33:/layout/fragment_locker.xml"
+        "merged": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-mergeDebugResources-30:/layout/fragment_locker.xml",
+        "source": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-main-33:/layout/fragment_locker.xml"
+    },
+    {
+        "merged": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-mergeDebugResources-30:/layout/fragment_search.xml",
+        "source": "/Users/doyoung/.gradle/daemon/8.2/com.example.flo_clone.app-main-33:/layout/fragment_search.xml"
     },
     {
         "merged": "com.example.flo_clone.app-mergeDebugResources-30:/layout/activity_main.xml",

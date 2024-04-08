@@ -36,16 +36,6 @@ drawable img_potcast_exp
 drawable img_video_exp
 drawable widget_black_play
 id homeFragment
-id home_pannel_album_img_iv
-id home_pannel_album_info_tv
-id home_pannel_album_singer_tv
-id home_pannel_album_title_tv
-id home_pannel_background_iv
-id home_pannel_btn_nugu_iv
-id home_pannel_btn_play_btn
-id home_pannel_btn_setting_iv
-id home_pannel_btn_ticket_iv
-id home_pannel_title_tv
 id lockerFragment
 id lookFragment
 id main_bnv
@@ -59,7 +49,7 @@ layout fragment_home
 layout fragment_locker
 layout fragment_look
 layout fragment_search
-menu bottom_nav_menu
+menu bottom_nav
 mipmap ic_launcher
 mipmap ic_launcher_round
 string app_name

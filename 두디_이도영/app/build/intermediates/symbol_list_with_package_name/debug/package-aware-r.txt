@@ -3322,16 +3322,6 @@ id hideable
 id home
 id homeAsUp
 id homeFragment
-id home_pannel_album_img_iv
-id home_pannel_album_info_tv
-id home_pannel_album_singer_tv
-id home_pannel_album_title_tv
-id home_pannel_background_iv
-id home_pannel_btn_nugu_iv
-id home_pannel_btn_play_btn
-id home_pannel_btn_setting_iv
-id home_pannel_btn_ticket_iv
-id home_pannel_title_tv
 id honorRequest
 id horizontal_only
 id icon
@@ -3822,7 +3812,7 @@ layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
-menu bottom_nav_menu
+menu bottom_nav
 mipmap ic_launcher
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description
