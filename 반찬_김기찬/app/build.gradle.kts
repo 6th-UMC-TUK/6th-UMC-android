@@ -4,11 +4,14 @@ plugins {
 }
 
 android {
-    namespace = "com.kkc.flo_clone"
+    namespace = "com.example.flo_clone"
     compileSdk = 34
 
+    viewBinding{
+        enable = true
+    }
     defaultConfig {
-        applicationId = "com.kkc.flo_clone"
+        applicationId = "com.example.flo_clone"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
