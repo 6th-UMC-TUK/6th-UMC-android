@@ -1,4 +1,4 @@
-package com.kkc.flo_clone
+package com.example.flo_clone
 
 import org.junit.Test
 
