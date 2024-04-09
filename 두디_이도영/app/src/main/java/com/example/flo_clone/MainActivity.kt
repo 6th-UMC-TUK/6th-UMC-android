@@ -2,6 +2,8 @@ package com.example.flo_clone
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.example.flo_clone.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -13,46 +15,18 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        initBottomNavigation()
+        initView()
+    }
+    private fun initView(){
 
+        initNavigator()
+    }
+    private fun initNavigator(){
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.main_frm) as NavHostFragment
+        val navController = navHostFragment.navController
+
+        binding.bottomNav.setupWithNavController(navController)
     }
 
-    private fun initBottomNavigation(){
-
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.main_frm, HomeFragment())
-            .commitAllowingStateLoss()
-
-        binding.mainBnv.setOnItemSelectedListener{ item ->
-            when (item.itemId) {
-
-                R.id.homeFragment -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_frm, HomeFragment())
-                        .commitAllowingStateLoss()
-                    return@setOnItemSelectedListener true
-                }
-
-                R.id.lookFragment -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_frm, LookFragment())
-                        .commitAllowingStateLoss()
-                    return@setOnItemSelectedListener true
-                }
-                R.id.searchFragment -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_frm, SearchFragment())
-                        .commitAllowingStateLoss()
-                    return@setOnItemSelectedListener true
-                }
-                R.id.lockerFragment -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_frm, LockerFragment())
-                        .commitAllowingStateLoss()
-                    return@setOnItemSelectedListener true
-                }
-            }
-            false
-        }
-    }
 }
