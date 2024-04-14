@@ -41,61 +41,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8b6c622-58e7-4cc7-b9de-f502587e6588" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/java/com/example/flo_clone/HomeFragment.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/java/com/example/flo_clone/LockerFragment.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/java/com/example/flo_clone/LookFragment.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/java/com/example/flo_clone/SearchFragment.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/drawable/btm_color_selector.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/drawable/btn_main_arrow_more.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/drawable/btn_main_mike.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/drawable/btn_main_setting.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/drawable/btn_main_ticket.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/drawable/btn_miniplay_pause.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/drawable/btn_miniplayer_go_list.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/drawable/btn_miniplayer_next.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/drawable/btn_miniplayer_play.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/drawable/btn_miniplayer_previous.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/drawable/btn_panel_play_large.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/drawable/discovery_banner_aos.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/drawable/ic_bottom_home_no_select.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/drawable/ic_bottom_home_select.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/drawable/ic_bottom_locker_no_select.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/drawable/ic_bottom_locker_select.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/drawable/ic_bottom_look_no_select.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/drawable/ic_bottom_look_select.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/drawable/ic_bottom_search_no_select.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/drawable/ic_bottom_search_select.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/drawable/ic_launcher_background.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/drawable/ic_launcher_foreground.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/drawable/ic_main_facebook.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/drawable/ic_main_instagram.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/drawable/ic_main_twitter.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/drawable/ic_main_youtube.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/drawable/img_album_exp.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/drawable/img_first_album_default.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/drawable/img_home_viewpager_exp.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/drawable/img_home_viewpager_exp2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/drawable/img_potcast_exp.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/drawable/img_video_exp.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/drawable/widget_black_play.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/font/suite_bold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/font/suite_extrabold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/font/suite_medium.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/font/suite_regular.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/font/suite_semibold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/layout/fragment_home.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/layout/fragment_locker.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/layout/fragment_look.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/layout/fragment_search.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/menu/bottom_nav.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/menu/navigation/dementia_graph.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/menu/navigation/login_graph.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/menu/navigation/nok_graph.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/navigation/main_graph.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../두디_이도영/app/src/main/res/values/styles.xml" afterDir="false" />
-    </list>
+    <list default="true" id="a8b6c622-58e7-4cc7-b9de-f502587e6588" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

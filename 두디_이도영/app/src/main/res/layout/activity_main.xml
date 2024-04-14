@@ -25,6 +25,84 @@
             app:layout_constraintTop_toTopOf="parent"
             app:navGraph="@navigation/main_graph" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main_player_cl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/bottom_nav"
+            android:paddingVertical="5dp"
+            android:background="#F9F9F9">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:text="제목"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+
+                    android:text="가수"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/btn_miniplayer_previous" />
+
+                <ImageView
+                    android:id="@+id/main_miniplayer_btn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/btn_miniplayer_play"/>
+
+                <ImageView
+                    android:id="@+id/main_pause_btn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:visibility="gone"
+                    android:src="@drawable/btn_miniplay_pause"/>
+
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/btn_miniplayer_next" />
+
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/btn_miniplayer_go_list"
+                    android:layout_marginHorizontal="15dp" />
+
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav"
@@ -36,7 +114,6 @@
             app:itemIconSize="32dp"
             app:itemIconTint="@drawable/btm_color_selector"
             app:itemPaddingBottom="0dp"
-            app:itemPaddingTop="2dp"
             app:itemRippleColor="@null"
             app:itemTextAppearanceActive="@style/TextAppearance.App.14sp.SemiBold"
             app:itemTextAppearanceInactive="@style/TextAppearance.App.14sp.SemiBold"
