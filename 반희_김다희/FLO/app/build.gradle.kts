@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.storage.CacheResetOnProcessCanceled.enabled
-
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
@@ -9,7 +7,7 @@ android {
     namespace = "com.example.flo"
     compileSdk = 34
 
-    viewBinding{ enable = true}
+    viewBinding{ enable = true }
 
     defaultConfig {
         applicationId = "com.example.flo"
