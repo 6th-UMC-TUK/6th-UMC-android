@@ -20,19 +20,22 @@ class HomeFragment() : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        Log.d("HomeFragment", "Success")
-//        binding = FragmentHomeBinding.inflate(inflater, container, false)
         binding = FragmentHomeBinding.inflate(
             inflater,
             container,
             false
         )
+
+        binding.homeAlbumImgIv1.setOnClickListener {
+            // activity에서 사용한 startActivity와는 조금 다름
+            (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.main_frm, AlbumFragment()).commitAllowingStateLoss()
+            // replace 안에는 어느 곳을 어떤 곳으로 바꿀지 작성
+            // 하나의 패턴처럼 이해
+            // 위의 코드로 프래그먼트를 이동함
+        }
         return binding.root
     }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
-    }
     override fun onDestroyView() {
         super.onDestroyView()
     }
