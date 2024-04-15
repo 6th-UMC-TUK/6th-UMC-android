@@ -9,7 +9,7 @@ import com.example.flo_clone.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
 
-    lateinit var binding: FragmentHomeBinding
+    lateinit var binding:  FragmentHomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -18,6 +18,11 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+        binding.homeTodayAlbumCoverImg01Iv.setOnClickListener {
+            (context as MainActivity).supportFragmentManager.beginTransaction()
+                .replace(R.id.main_frm, AlbumFragment())
+                .commitAllowingStateLoss()
+        }
         return binding.root
     }
 }

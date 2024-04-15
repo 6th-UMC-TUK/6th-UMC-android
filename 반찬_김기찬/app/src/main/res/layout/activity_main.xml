@@ -17,6 +17,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main_player_cl"
+        android:clickable="true"
+        android:focusable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/main_bnv"
