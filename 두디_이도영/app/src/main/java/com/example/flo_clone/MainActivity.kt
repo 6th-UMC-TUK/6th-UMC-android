@@ -18,10 +18,17 @@ class MainActivity : AppCompatActivity() {
         // binding 사용중
         // 원래라면 findById로 접근해야함 -> binding으로 간편하게 사용 가능
 
+        val song = Song(binding.mainMiniplayerTitleTv.text.toString(), binding.mainMiniplayerSingerTv.text.toString())
+
         binding.mainPlayerCl.setOnClickListener {
             // 뷰에 대한 함수
-            startActivity(Intent(this, SongActivity::class.java))
+//            startActivity(Intent(this, SongActivity::class.java))
             // Intent를 사용하여 this에서 SongActivity로 이동
+            val intent = Intent(this, SongActivity::class.java)
+            // 재사용하기 쉽도록 선언
+            intent.putExtra("title", song.title)
+            intent.putExtra("singer", song.singer)
+            startActivity(intent)
         }
 
         initView()
@@ -37,5 +44,4 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNav.setupWithNavController(navController)
     }
-
 }

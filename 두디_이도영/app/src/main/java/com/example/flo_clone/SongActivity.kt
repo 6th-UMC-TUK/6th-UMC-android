@@ -38,6 +38,13 @@ class SongActivity : AppCompatActivity(){
         binding.songPauseIv.setOnClickListener {
             setPlayoerStatus(true)
         }
+
+        if(intent.hasExtra("title") && intent.hasExtra("singer")){
+            // intent로 title과 singer이 있는지 확인
+            binding.songMusicTitleTv.text = intent.getStringExtra("title")
+            // intent에서 "title"이라는 키 값을 가진 intent로 값을 바꿔줌을 의미
+            binding.songSingerNameTv.text = intent.getStringExtra("singer")
+        }
     }
 
     fun setPlayoerStatus(isPlaying : Boolean){
