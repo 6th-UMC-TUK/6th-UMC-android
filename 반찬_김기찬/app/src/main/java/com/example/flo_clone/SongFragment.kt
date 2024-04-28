@@ -41,6 +41,24 @@ class SongFragment : Fragment() {
         binding.songTrollLayout.setOnClickListener {
             Toast.makeText(activity, "돌림노래", Toast.LENGTH_SHORT).show()
         }
+
+        binding.songMixOffTv.setOnClickListener {
+            setMixPlaylist(false)
+        }
+        binding.songMixOnTv.setOnClickListener {
+            setMixPlaylist(true)
+        }
+
         return binding.root
+    }
+
+    private fun setMixPlaylist(isPlaying : Boolean){
+        if(isPlaying) {
+            binding.songMixOffTv.visibility = View.VISIBLE
+            binding.songMixOnTv.visibility = View.GONE
+        } else {
+            binding.songMixOffTv.visibility = View.GONE
+            binding.songMixOnTv.visibility = View.VISIBLE
+        }
     }
 }
