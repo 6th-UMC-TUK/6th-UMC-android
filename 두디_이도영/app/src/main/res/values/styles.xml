@@ -5,4 +5,5 @@
         <item name="android:fontFamily">@font/suite_semibold</item>
         <item name="android:textColor">@color/black</item>
     </style>
+
 </resources>
