@@ -212,7 +212,7 @@
             android:id="@+id/song_pause_iv"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@drawable/btn_miniplay_mvpause"
+            android:src="@drawable/btn_miniplay_pause"
             android:visibility="gone" />
 
         <ImageView

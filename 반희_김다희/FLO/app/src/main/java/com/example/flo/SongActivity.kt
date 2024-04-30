@@ -5,33 +5,33 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.flo.databinding.ActivitySongBinding
+import java.util.Timer
 
 
 class SongActivity : AppCompatActivity() {
 
     lateinit var binding : ActivitySongBinding
+    lateinit var timer : Timer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySongBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.songDownIb.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
-        }
+        initClickListener()
     }
 
     private fun initClickListener(){
         binding.songDownIb.setOnClickListener {
-            finish()
+            startActivity(Intent(this, MainActivity::class.java))
         }
 
         binding.songMiniplayerIv.setOnClickListener {
-            setPlayerStatus(true)
+            setPlayerStatus(false)
         }
 
         binding.songPauseIv.setOnClickListener {
-            setPlayerStatus(false)
+            setPlayerStatus(true)
         }
 
         binding.songLikeIv.setOnClickListener {
