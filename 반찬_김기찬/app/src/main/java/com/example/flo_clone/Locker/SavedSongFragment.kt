@@ -1,23 +1,22 @@
-package com.example.flo_clone
+package com.example.flo_clone.Locker
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.flo_clone.databinding.FragmentBannerBinding
+import com.example.flo_clone.databinding.FragmentLockerSavedsongBinding
 
-class BannerFragment(val imgRes : Int): Fragment() {
-    lateinit var binding : FragmentBannerBinding
+class SavedSongFragment : Fragment() {
+    lateinit var binding: FragmentLockerSavedsongBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentBannerBinding.inflate(inflater, container, false)
+        binding = FragmentLockerSavedsongBinding.inflate(inflater, container, false)
 
-        binding.bannerImageIv.setImageResource(imgRes)
         return binding.root
     }
 }
