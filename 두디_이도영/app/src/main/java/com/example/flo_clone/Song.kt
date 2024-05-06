@@ -6,5 +6,6 @@ data class Song(
     //  = "" 을 통해 초기화
     var second: Int = 0,
     var playTime: Int = 0,
-    var isPlaying: Boolean = false
+    var isPlaying: Boolean = false,
+    var music: String = "",
 )
