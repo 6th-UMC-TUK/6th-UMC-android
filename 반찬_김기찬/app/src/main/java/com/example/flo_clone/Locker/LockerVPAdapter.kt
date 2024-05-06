@@ -1,8 +1,7 @@
-package com.example.flo_clone
+package com.example.flo_clone.Locker
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.flo_clone.databinding.FragmentLockerSavedsongBinding
 
 class LockerVPAdapter(fragmentActivity: LockerFragment): FragmentStateAdapter(fragmentActivity) {
     override fun getItemCount(): Int = 2

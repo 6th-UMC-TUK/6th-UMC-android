@@ -1,21 +1,23 @@
-package com.example.flo_clone
+package com.example.flo_clone.Album
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.flo_clone.databinding.FragmentLockerMusicfileBinding
+import com.example.flo_clone.databinding.FragmentDetailBinding
 
-class MusicFileFragment : Fragment() {
-    lateinit var binding: FragmentLockerMusicfileBinding
+class DetailFragment : Fragment() {
+
+    lateinit var binding : FragmentDetailBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentLockerMusicfileBinding.inflate(inflater, container, false)
+        binding = FragmentDetailBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 }

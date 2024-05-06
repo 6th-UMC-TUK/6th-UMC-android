@@ -1,13 +1,14 @@
-package com.example.flo_clone
+package com.example.flo_clone.Album
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.flo_clone.Home.HomeFragment
+import com.example.flo_clone.MainActivity
+import com.example.flo_clone.R
 import com.example.flo_clone.databinding.FragmentAlbumBinding
-import com.example.flo_clone.databinding.FragmentSongBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
 class AlbumFragment:Fragment() {

@@ -1,4 +1,4 @@
-package com.example.flo_clone
+package com.example.flo_clone.Home
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter

@@ -1,4 +1,4 @@
-package com.example.flo_clone
+package com.example.flo_clone.Home
 
 import android.os.Bundle
 import android.os.Handler
@@ -9,6 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
+import com.example.flo_clone.Album.AlbumFragment
+import com.example.flo_clone.MainActivity
+import com.example.flo_clone.R
 import com.example.flo_clone.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {

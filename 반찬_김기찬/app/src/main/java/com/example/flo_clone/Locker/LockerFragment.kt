@@ -1,4 +1,4 @@
-package com.example.flo_clone
+package com.example.flo_clone.Locker
 
 import android.os.Bundle
 import android.view.LayoutInflater

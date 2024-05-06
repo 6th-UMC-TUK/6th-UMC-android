@@ -1,23 +1,23 @@
-package com.example.flo_clone
+package com.example.flo_clone.Home
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.flo_clone.databinding.FragmentDetailBinding
+import com.example.flo_clone.databinding.FragmentPanelBinding
 
-class DetailFragment : Fragment() {
-
-    lateinit var binding : FragmentDetailBinding
+class PanelFragment(val imgRes : Int) : Fragment() {
+    lateinit var binding : FragmentPanelBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentDetailBinding.inflate(inflater, container, false)
+        binding = FragmentPanelBinding.inflate(inflater, container, false)
 
+        binding.panelImageIv.setImageResource(imgRes)
         return binding.root
     }
 }
