@@ -11,6 +11,11 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.*
 import com.example.flo.databinding.ActivitySongBinding
 import com.google.gson.Gson
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import java.util.Timer
 
 
@@ -21,7 +26,6 @@ class SongActivity : AppCompatActivity() {
     lateinit var timer : Timer
     private var mediaPlayer: MediaPlayer? = null
     private var gson: Gson = Gson()
-    var currentPosition = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,26 +35,6 @@ class SongActivity : AppCompatActivity() {
         initClickListener()
         initSong()
         setPlayer(song)
-
-        binding.songProgressSb.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                if (fromUser) {
-                    currentPosition = progress
-                    binding.songStartTimeTv.text = String.format(
-                        "%d:%02d",
-                        currentPosition / 60000,
-                        (currentPosition - 60000 * (currentPosition / 60000)) / 1000
-                    )
-                }
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-            }
-
-        })
     }
 
     private fun initClickListener() {
@@ -60,10 +44,12 @@ class SongActivity : AppCompatActivity() {
 
         binding.songMiniplayerIv.setOnClickListener {
             setPlayerStatus(true)
+            mediaPlayer?.start()
         }
 
         binding.songPauseIv.setOnClickListener {
             setPlayerStatus(false)
+            mediaPlayer?.pause()
         }
 
         binding.songLikeIv.setOnClickListener {
@@ -117,14 +103,21 @@ class SongActivity : AppCompatActivity() {
     private fun setPlayer(song: Song){
         binding.songMusicTitleTv.text = intent.getStringExtra("title")!!
         binding.songSingerNameTv.text = intent.getStringExtra("singer")!!
-        binding.songStartTimeTv.text = String.format("%02d:%02d",song.second/ 60, song.second % 60)
-        binding.songEndTimeTv.text = String.format("%02d:%02d",song.playTime/ 60, song.playTime % 60)
         binding.songProgressSb.progress = (song.second * 1000 / song.playTime)
 
         val music = resources.getIdentifier(song.music, "raw", this.packageName)
         mediaPlayer = MediaPlayer.create(this, music)
 
+        val timeformat = SimpleDateFormat("mm:ss")
+//        binding.songStartTimeTv.text = timeformat.format(mediaPlayer?.currentPosition)
+        binding.songEndTimeTv.text = timeformat.format(mediaPlayer?.duration)
+        binding.songStartTimeTv.text =  String.format("%02d:%02d", song.second / 60, song.second %60)
         setPlayerStatus(song.isplaying)
+
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(1000)
+            binding.songStartTimeTv.text = timeformat.format(mediaPlayer?.currentPosition)
+        }
     }
 
     private fun startTimer(){
@@ -149,12 +142,14 @@ class SongActivity : AppCompatActivity() {
                         runOnUiThread {
                             binding.songProgressSb.progress = ((mills / playTime)*100).toInt()
                         }
-                        if (mills % 1000 == 0f){
+                        if (mills % 1000 == 0f) {
                             runOnUiThread {
-                                binding.songStartTimeTv.text = String.format("%02d:%02d",song.second/ 60, song.second % 60)
+                                binding.songStartTimeTv.text =
+                                    String.format("%02d:%02d", second / 60, second % 60)
                             }
-                            second++
+                            second ++
                         }
+
                     }
                 }
             }catch (e:InterruptedException){
