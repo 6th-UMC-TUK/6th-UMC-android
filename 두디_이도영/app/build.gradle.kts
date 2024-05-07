@@ -51,4 +51,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation("me.relex:circleindicator:2.1.6")
+    implementation("com.google.code.gson:gson:2.8.7")
 }

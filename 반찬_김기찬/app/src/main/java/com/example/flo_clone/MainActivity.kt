@@ -3,23 +3,66 @@ package com.example.flo_clone
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.example.flo_clone.Home.HomeFragment
+import com.example.flo_clone.Locker.LockerFragment
+import com.example.flo_clone.Look.LookFragment
+import com.example.flo_clone.Search.SearchFragment
+import com.example.flo_clone.Song.Song
+import com.example.flo_clone.Song.SongActivity
 import com.example.flo_clone.databinding.ActivityMainBinding
+import com.google.gson.Gson
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
 
+    private var song: Song = Song()
+    private var gson: Gson = Gson()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.Theme_Flo_clone)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+//        val song = Song(binding.mainMiniplayerTitleTv.text.toString(), binding.mainMiniplayerSingerTv.text.toString(), 0, 60, false, "music_lilac")
+
         binding.mainPlayerCl.setOnClickListener {
-            startActivity(Intent(this, SongActivity::class.java))
+            val intent = Intent(this, SongActivity::class.java)
+            intent.putExtra("title", song.title)
+            intent.putExtra("singer", song.singer)
+            intent.putExtra("second", song.second)
+            intent.putExtra("playTime", song.playTime)
+            intent.putExtra("isPlaying", song.isPlaying)
+            intent.putExtra("music", song.music)
+
+            startActivity(intent)
         }
 
         initBottomNavigation()
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
+        val songJson = sharedPreferences.getString("songData", null)
+
+        song = if (songJson == null) {
+            Song("라일락", "아이유 (IU)", 0, 60, false, "music_lilac")
+        } else {
+            gson.fromJson(songJson, Song::class.java)
+        }
+
+       setMiniPlayer(song)
+
+    }
+
+    private fun setMiniPlayer(song: Song) {
+        binding.mainMiniplayerTitleTv.text = song.title
+        binding.mainMiniplayerSingerTv.text = song.singer
+        binding.mainSeekbarSb.progress = (song.second * 100000) / song.playTime
     }
 
     private fun initBottomNavigation(){

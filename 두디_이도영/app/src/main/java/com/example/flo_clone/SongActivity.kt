@@ -1,11 +1,13 @@
 package com.example.flo_clone
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.flo_clone.databinding.ActivityMainBinding
 import com.example.flo_clone.databinding.ActivitySongBinding
+import com.google.gson.Gson
 
 class SongActivity : AppCompatActivity() {
     // :은 상속을 의미
@@ -15,6 +17,13 @@ class SongActivity : AppCompatActivity() {
     // 선언은 지금 하지만, 초기화는 나중에 한다는 뜻 -> 선언하면서 초기화 하는 게 아님
     lateinit var song: Song
     lateinit var timer: Timer
+
+    private var mediaPlayer: MediaPlayer? = null
+    // 비디오 플레이어 생성
+    // nullable로 설정
+    private var gson: Gson = Gson()
+    // Gson 설정
+    // song을 보다 쉽게 저장하기 위해 사용
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // activity가 생성될 때 처음으로 실행되는 함수
@@ -47,11 +56,6 @@ class SongActivity : AppCompatActivity() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        timer.interrupt()
-    }
-
     private fun initSing() {
         if (intent.hasExtra("title") && intent.hasExtra("singer")) {
             song = Song(
@@ -59,7 +63,8 @@ class SongActivity : AppCompatActivity() {
                 intent.getStringExtra("singer")!!,
                 intent.getIntExtra("second", 0),
                 intent.getIntExtra("playTime", 60),
-                intent.getBooleanExtra("isPlaying", false)
+                intent.getBooleanExtra("isPlaying", false),
+                intent.getStringExtra("music")!!,
             )
         }
         startTimer()
@@ -74,6 +79,12 @@ class SongActivity : AppCompatActivity() {
             String.format("%02d:%02d", song.playTime / 60, song.playTime % 60)
         binding.songProgressSb.progress = (song.second * 1000 / song.playTime)
 
+        val music = resources.getIdentifier(song.music, "raw", this.packageName)
+        // 찾고자 하는 리소스 이름, 폴더, 패키지 이름을 넣어줌
+        // 리소스를 반환 받음
+        mediaPlayer = MediaPlayer.create(this, music)
+        // 미디어 플레이어에 음악을 넘겨줌
+
         setPlayoerStatus(song.isPlaying)
     }
 
@@ -84,10 +95,18 @@ class SongActivity : AppCompatActivity() {
         if (isPlaying) {
             binding.songMiniplayerIv.visibility = View.GONE
             binding.songPauseIv.visibility = View.VISIBLE
+
+            mediaPlayer?.start()
+            // mediaPlayer 재생
         } else {
             binding.songMiniplayerIv.visibility = View.VISIBLE
             binding.songPauseIv.visibility = View.GONE
             // 정지버튼이 보이도록 바꿈
+
+            if(mediaPlayer?.isPlaying == true) {
+                // if문은 재생 중이 아닐 때 pause를 누르면 오류가 발생할 수 있기 때문에 조건문 추가
+                mediaPlayer?.pause()
+            }
         }
     }
 
@@ -104,7 +123,6 @@ class SongActivity : AppCompatActivity() {
             super.run()
             try {
                 while (true) {
-
                     if (second >= playTime) {
                         break
                     }
@@ -129,5 +147,37 @@ class SongActivity : AppCompatActivity() {
             }
 
         }
+    }
+
+    override fun onPause(){
+        // 사용자가 포커스를 잃었을 때, 음악을 중지하기 위함
+        super.onPause()
+        setPlayoerStatus(false)
+
+        song.second = ((binding.songProgressSb.progress * song.playTime)/100)/1000
+        // 음악이 몇 초까지 재생되었는지 반영
+        // 단위가 밀리세컨드이기 때문에 1000을 나눔
+        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
+        // 재생하던 음악이 남아있으려면 어딘가에 저장해줘야함
+        // 내부 저장소에 저장함
+        val editor = sharedPreferences.edit()
+        // gson을 사용하여 song객체를 sharedPreferences에 보다 쉽게 저장 가능
+        val songJson = gson.toJson(song)
+        // song객체를 Json 포멧으로 변환 시켜줌
+        editor.putString("songData", songJson)
+        // 변환된 포맷을 저장
+
+        editor.apply()
+        // 실제 저장을 하기위해 필요함, git의 push 같은 역할
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        timer.interrupt()
+
+        mediaPlayer?.release()
+        // mediaPlayer가 갖고있던 리소스 해제
+        mediaPlayer = null
+        // mediaPlayer 해제
     }
 }

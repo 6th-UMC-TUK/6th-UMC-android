@@ -27,7 +27,7 @@ class HomeFragment() : Fragment() {
             false
         )
 
-        binding.homeTodayAlbumCoverImg01Iv.setOnClickListener {
+        binding.homeAlbumImgIv1.setOnClickListener {
             // activity에서 사용한 startActivity와는 조금 다름
             (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.main_frm, AlbumFragment()).commitAllowingStateLoss()
             // replace 안에는 어느 곳을 어떤 곳으로 바꿀지 작성
@@ -44,8 +44,21 @@ class HomeFragment() : Fragment() {
 //        binding.homeBannerVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 //        Log.d("HomeFragment", "ViewPager2 좌우 스크롤")
         // ViewPager가 좌우로 스크롤될 수 있도록 설정
+        val albumAdapter = AlbumVPAdapter(this)
 
+        val bannerAdapter = BannerVPAdapter(this)
+        bannerAdapter.addFragment(BannerFragment(R.drawable.img_home_viewpager_exp))
+        bannerAdapter.addFragment(BannerFragment(R.drawable.img_home_viewpager_exp2))
+        binding.homeBannerVp.adapter = bannerAdapter
+        binding.homeBannerVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
+        val panelAdapter = PanelVPAdapter(this)
+        panelAdapter.addFragment(PanelFragment(R.drawable.img_first_album_default))
+        panelAdapter.addFragment(PanelFragment(R.drawable.img_first_album_default))
+        panelAdapter.addFragment(PanelFragment(R.drawable.img_first_album_default))
+        binding.homePannelVp.adapter = panelAdapter
+        binding.homePannelVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        binding.indicator.setViewPager(binding.homePannelVp)
         return binding.root
     }
 
