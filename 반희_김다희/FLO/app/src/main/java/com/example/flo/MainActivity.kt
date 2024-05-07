@@ -26,13 +26,14 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("second", song.second)
             intent.putExtra("playTime", song.playTime)
             intent.putExtra("isPlaying", song.isplaying)
+            intent.putExtra("music", song.music)
             startActivity(intent)
             Log.d("MainActivity", "enter")
         }
 
         initBottomNavigation()
 
-//        val song = Song(binding.mainMiniplayerTitleTv.text.toString(), binding.mainMiniplayerSingerTv.text.toString(),0,60,false)
+        val song = Song(binding.mainMiniplayerTitleTv.text.toString(), binding.mainMiniplayerSingerTv.text.toString(),0,60,false)
     }
 
     override fun onStart() {
