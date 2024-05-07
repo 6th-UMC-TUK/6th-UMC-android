@@ -9,10 +9,13 @@ import com.example.flo.databinding.FragmentLockerMusicfileBinding
 import com.example.flo.databinding.FragmentVideoBinding
 
 class MusicFileFragment: Fragment() {
-
     lateinit var binding: FragmentLockerMusicfileBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentLockerMusicfileBinding.inflate(inflater, container, false)
 
         return binding.root
