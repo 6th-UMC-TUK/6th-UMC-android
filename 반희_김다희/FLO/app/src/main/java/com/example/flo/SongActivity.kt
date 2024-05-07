@@ -82,8 +82,8 @@ class SongActivity : AppCompatActivity() {
         if(intent.hasExtra("title") && intent.hasExtra("singer")){
             song = Song(
                 intent.getStringExtra("title")!!,
-                intent.getStringExtra("title")!!,
-                intent.getIntExtra("title", 0),
+                intent.getStringExtra("singer")!!,
+                intent.getIntExtra("second", 0),
                 intent.getIntExtra("playTime", 0),
                 intent.getBooleanExtra("isPlaying", false),
                 intent.getStringExtra("music")!!

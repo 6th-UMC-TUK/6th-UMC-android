@@ -2,6 +2,7 @@ package com.example.flo
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.flo.databinding.ActivityMainBinding
 import com.google.gson.Gson
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("playTime", song.playTime)
             intent.putExtra("isPlaying", song.isplaying)
             startActivity(intent)
+            Log.d("MainActivity", "enter")
         }
 
         initBottomNavigation()
