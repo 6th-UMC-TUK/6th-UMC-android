@@ -5,6 +5,7 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.*
@@ -20,6 +21,7 @@ class SongActivity : AppCompatActivity() {
     lateinit var timer : Timer
     private var mediaPlayer: MediaPlayer? = null
     private var gson: Gson = Gson()
+    var currentPosition = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +31,26 @@ class SongActivity : AppCompatActivity() {
         initClickListener()
         initSong()
         setPlayer(song)
+
+        binding.songProgressSb.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                if (fromUser) {
+                    currentPosition = progress
+                    binding.songStartTimeTv.text = String.format(
+                        "%d:%02d",
+                        currentPosition / 60000,
+                        (currentPosition - 60000 * (currentPosition / 60000)) / 1000
+                    )
+                }
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+            }
+
+        })
     }
 
     private fun initClickListener() {
@@ -37,11 +59,11 @@ class SongActivity : AppCompatActivity() {
         }
 
         binding.songMiniplayerIv.setOnClickListener {
-            setPlayerStatus(false)
+            setPlayerStatus(true)
         }
 
         binding.songPauseIv.setOnClickListener {
-            setPlayerStatus(true)
+            setPlayerStatus(false)
         }
 
         binding.songLikeIv.setOnClickListener {
@@ -70,11 +92,11 @@ class SongActivity : AppCompatActivity() {
         timer.isPlaying = isPlaying
 
         if (isPlaying) {
-            binding.songMiniplayerIv.visibility = View.VISIBLE
-            binding.songPauseIv.visibility = View.GONE
-        } else {
             binding.songMiniplayerIv.visibility = View.GONE
             binding.songPauseIv.visibility = View.VISIBLE
+        } else {
+            binding.songMiniplayerIv.visibility = View.VISIBLE
+            binding.songPauseIv.visibility = View.GONE
         }
     }
 
@@ -96,7 +118,7 @@ class SongActivity : AppCompatActivity() {
         binding.songMusicTitleTv.text = intent.getStringExtra("title")!!
         binding.songSingerNameTv.text = intent.getStringExtra("singer")!!
         binding.songStartTimeTv.text = String.format("%02d:%02d",song.second/ 60, song.second % 60)
-        binding.songEndTimeTv.text = String.format("%02d:%02d",song.second/ 60, song.second % 60)
+        binding.songEndTimeTv.text = String.format("%02d:%02d",song.playTime/ 60, song.playTime % 60)
         binding.songProgressSb.progress = (song.second * 1000 / song.playTime)
 
         val music = resources.getIdentifier(song.music, "raw", this.packageName)

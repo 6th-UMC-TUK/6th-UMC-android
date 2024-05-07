@@ -160,11 +160,14 @@
         android:background="@null"
         android:paddingStart="0dp"
         android:paddingEnd="0dp"
+        android:progress="0"
+        android:progressBackgroundTint="@color/song_player_bg"
+        android:progressTint="@color/song_player"
         android:thumb="@color/transparent"
+        android:max="100000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/song_like_iv_layout"  />
-
     <TextView
         android:id="@+id/song_start_time_tv"
         android:layout_width="wrap_content"
