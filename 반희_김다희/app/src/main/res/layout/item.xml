@@ -20,7 +20,8 @@
             android:text="o"
             android:textStyle="bold"
             android:textSize="13dp"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"/>
 
         <TextView
             android:id="@+id/tv_memo"
