@@ -13,7 +13,7 @@ import com.google.gson.Gson
 class HomeFragment : Fragment() {
 
     lateinit var binding: FragmentHomeBinding
-    private var albumDatas = ArrayList<Album>()
+     ivate var albumDatas = ArrayList<Album>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,7 +36,7 @@ class HomeFragment : Fragment() {
         // 더미데이터랑 Adapter 연결
         val albumRVAdapter = AlbumRVAdapter(albumDatas)
 
-        // 리사이클러뷰에 어댑터를 연결
+        // 리사이클러뷰에 Adapter 연결
         binding.homeTodayMusicAlbumRv.adapter = albumRVAdapter
 
         // 레이아웃 매니저 설정
