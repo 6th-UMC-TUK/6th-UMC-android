@@ -19,7 +19,7 @@ class SavedSongRVAdapter() :
     }
 
 
-    // 곡 추가
+    // 곡 저장
     fun addSongs(songs: ArrayList<Song>) {
         this.songs.clear()
         this.songs.addAll(songs)
@@ -48,6 +48,7 @@ class SavedSongRVAdapter() :
         }
     }
 
+    // 데이터 세트 크기 함수
     override fun getItemCount(): Int = songs.size
 
     // 뷰 홀더
