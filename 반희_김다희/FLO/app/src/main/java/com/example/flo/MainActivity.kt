@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("second", song.second)
             intent.putExtra("playTime", song.playTime)
             intent.putExtra("isPlaying", song.isplaying)
+            intent.putExtra("music", song.music)
             startActivity(intent)
             Log.d("MainActivity", "enter")
         }

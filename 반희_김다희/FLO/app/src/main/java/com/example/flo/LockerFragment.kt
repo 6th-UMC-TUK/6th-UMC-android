@@ -12,6 +12,7 @@ class LockerFragment : Fragment() {
 
     lateinit var binding: FragmentLockerBinding
     private val information = arrayListOf("저장한 곡", "음악파일")
+    private var songDatas = ArrayList<SavedSong>()
 
 
     override fun onCreateView(

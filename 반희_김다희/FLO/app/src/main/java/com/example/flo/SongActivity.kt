@@ -5,11 +5,17 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.*
 import com.example.flo.databinding.ActivitySongBinding
 import com.google.gson.Gson
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import java.util.Timer
 
 
@@ -37,11 +43,13 @@ class SongActivity : AppCompatActivity() {
         }
 
         binding.songMiniplayerIv.setOnClickListener {
-            setPlayerStatus(false)
+            setPlayerStatus(true)
+            mediaPlayer?.start()
         }
 
         binding.songPauseIv.setOnClickListener {
-            setPlayerStatus(true)
+            setPlayerStatus(false)
+            mediaPlayer?.pause()
         }
 
         binding.songLikeIv.setOnClickListener {
@@ -70,11 +78,11 @@ class SongActivity : AppCompatActivity() {
         timer.isPlaying = isPlaying
 
         if (isPlaying) {
-            binding.songMiniplayerIv.visibility = View.VISIBLE
-            binding.songPauseIv.visibility = View.GONE
-        } else {
             binding.songMiniplayerIv.visibility = View.GONE
             binding.songPauseIv.visibility = View.VISIBLE
+        } else {
+            binding.songMiniplayerIv.visibility = View.VISIBLE
+            binding.songPauseIv.visibility = View.GONE
         }
     }
 
@@ -95,13 +103,21 @@ class SongActivity : AppCompatActivity() {
     private fun setPlayer(song: Song){
         binding.songMusicTitleTv.text = intent.getStringExtra("title")!!
         binding.songSingerNameTv.text = intent.getStringExtra("singer")!!
-        binding.songStartTimeTv.text = String.format("%02d:%02d",song.second/ 60, song.second % 60)
-        binding.songEndTimeTv.text = String.format("%02d:%02d",song.second/ 60, song.second % 60)
         binding.songProgressSb.progress = (song.second * 1000 / song.playTime)
+
         val music = resources.getIdentifier(song.music, "raw", this.packageName)
         mediaPlayer = MediaPlayer.create(this, music)
 
+        val timeformat = SimpleDateFormat("mm:ss")
+//        binding.songStartTimeTv.text = timeformat.format(mediaPlayer?.currentPosition)
+        binding.songEndTimeTv.text = timeformat.format(mediaPlayer?.duration)
+        binding.songStartTimeTv.text =  String.format("%02d:%02d", song.second / 60, song.second %60)
         setPlayerStatus(song.isplaying)
+
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(1000)
+            binding.songStartTimeTv.text = timeformat.format(mediaPlayer?.currentPosition)
+        }
     }
 
     private fun startTimer(){
@@ -126,12 +142,14 @@ class SongActivity : AppCompatActivity() {
                         runOnUiThread {
                             binding.songProgressSb.progress = ((mills / playTime)*100).toInt()
                         }
-                        if (mills % 1000 == 0f){
+                        if (mills % 1000 == 0f) {
                             runOnUiThread {
-                                binding.songStartTimeTv.text = String.format("%02d:%02d",song.second/ 60, song.second % 60)
+                                binding.songStartTimeTv.text =
+                                    String.format("%02d:%02d", second / 60, second % 60)
                             }
-                            second++
+                            second ++
                         }
+
                     }
                 }
             }catch (e:InterruptedException){
