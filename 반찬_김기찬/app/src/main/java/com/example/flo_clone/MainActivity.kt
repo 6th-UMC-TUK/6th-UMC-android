@@ -3,6 +3,7 @@ package com.example.flo_clone
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.flo_clone.Home.HomeFragment
 import com.example.flo_clone.Locker.LockerFragment
@@ -40,6 +41,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        initClickListener()
         initBottomNavigation()
 
     }
@@ -50,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         val songJson = sharedPreferences.getString("songData", null)
 
         song = if (songJson == null) {
-            Song("라일락", "아이유 (IU)", 0, 60, false, "music_lilac")
+            Song("라일락", "아이유 (IU)", 0, 214, false, "music_lilac")
         } else {
             gson.fromJson(songJson, Song::class.java)
         }
@@ -58,7 +60,24 @@ class MainActivity : AppCompatActivity() {
        setMiniPlayer(song)
 
     }
+    private fun initClickListener() {
+        binding.mainMiniplayBtn.setOnClickListener {
+            setPlayerStatus(true)
+        }
+        binding.mainPauseBtn.setOnClickListener {
+            setPlayerStatus(false)
+        }
+    }
+    private fun setPlayerStatus(isPlaying : Boolean){
 
+        if(isPlaying) {
+            binding.mainMiniplayBtn.visibility = View.GONE
+            binding.mainPauseBtn.visibility = View.VISIBLE
+        } else {
+            binding.mainMiniplayBtn.visibility = View.VISIBLE
+            binding.mainPauseBtn.visibility = View.GONE
+        }
+    }
     private fun setMiniPlayer(song: Song) {
         binding.mainMiniplayerTitleTv.text = song.title
         binding.mainMiniplayerSingerTv.text = song.singer
