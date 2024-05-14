@@ -86,7 +86,7 @@ class SongActivity : AppCompatActivity() {
                 intent.getIntExtra("second", 0),
                 intent.getIntExtra("playTime", 0),
                 intent.getBooleanExtra("isPlaying", false),
-                intent.getStringExtra("music")!!
+                intent.getStringExtra("music") ?: ""
             )
         }
         startTimer()
