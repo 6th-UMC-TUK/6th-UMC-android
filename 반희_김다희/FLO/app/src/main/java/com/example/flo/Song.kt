@@ -2,6 +2,7 @@ package com.example.flo
 
 
 data class Song(
+        var coverImg: Int? = null,
         val title : String = "",
         val singer : String = "",
         var second : Int = 0,

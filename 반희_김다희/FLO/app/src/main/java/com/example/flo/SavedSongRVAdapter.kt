@@ -9,6 +9,7 @@ class SavedSongRVAdapter(private val savedSongList: ArrayList<SavedSong>) :
     RecyclerView.Adapter<SavedSongRVAdapter.ViewHolder>()
 {
     private val songs = ArrayList<Song>()
+    lateinit var song: Song
     interface MyItemClickListener{
         fun onRemoveSong(songId: Int)
     }
