@@ -89,6 +89,7 @@ class SongActivity : AppCompatActivity() {
     private fun initSong(){
         if(intent.hasExtra("title") && intent.hasExtra("singer")){
             song = Song(
+                intent.getIntExtra("coverImg",0),
                 intent.getStringExtra("title")!!,
                 intent.getStringExtra("singer")!!,
                 intent.getIntExtra("second", 0),
