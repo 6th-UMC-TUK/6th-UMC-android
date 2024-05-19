@@ -4,15 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flo.databinding.ItemSongBinding
-import com.example.flo.Song
 
 
-class SavedSongRVAdapter(private val songs: ArrayList<Song>) :
+class SavedSongRVAdapter(private val songList: ArrayList<Song>) :
     RecyclerView.Adapter<SavedSongRVAdapter.ViewHolder>() {
 
     //클릭 인터페이스 정의
     interface MyItemClickListener {
-        fun onRemoveSong(position: Int)
+        fun onRemoveItem(position: Int)
     }
 
     private lateinit var mItemClickListener: MyItemClickListener
@@ -21,18 +20,18 @@ class SavedSongRVAdapter(private val songs: ArrayList<Song>) :
         mItemClickListener = itemClickListener
     }
 
-
-    // 곡 저장
-    fun addSongs(songs: ArrayList<Song>) {
-        this.songs.clear()
-        this.songs.addAll(songs)
-
-        notifyDataSetChanged()
-    }
+//
+//    // 곡 저장
+//    fun addItem(songs: ArrayList<Song>) {
+//        this.songList.clear()
+//        this.songList.addAll(songs)
+//
+//        notifyDataSetChanged()
+//    }
 
     // 저장된 곡 삭제
-    private fun removeSong(position: Int) {
-        songs.removeAt(position)
+    fun removeItem(position: Int) {
+        songList.removeAt(position)
         notifyDataSetChanged()
     }
 
@@ -48,15 +47,15 @@ class SavedSongRVAdapter(private val songs: ArrayList<Song>) :
     }
 
     override fun onBindViewHolder(holder: SavedSongRVAdapter.ViewHolder, position: Int) {
-        holder.bind(songs[position])
+        holder.bind(songList[position])
         holder.binding.itemSongMoreIv.setOnClickListener {
-            mItemClickListener.onRemoveSong(position)
-            removeSong(position)
+            mItemClickListener.onRemoveItem(position)
+            removeItem(position)
         }
     }
 
     // 데이터 세트 크기 함수
-    override fun getItemCount(): Int = songs.size
+    override fun getItemCount(): Int = songList.size
 
     // 뷰 홀더
     inner class ViewHolder(val binding: ItemSongBinding) : RecyclerView.ViewHolder(binding.root) {
