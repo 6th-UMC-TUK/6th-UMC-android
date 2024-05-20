@@ -1,3 +1,3 @@
 package com.example.memo
 
-class Data (val memo: String)
+data class Data (val memo: String)

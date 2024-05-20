@@ -233,179 +233,189 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/indicator" />
 
-        <HorizontalScrollView
-            android:id="@+id/home_today_music_album_sv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/home_today_music_album_rv"
+            android:layout_width="match_parent"
+            android:layout_height="210dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
-            android:overScrollMode="never"
-            android:scrollbars="none"
+            tools:listitem="@layout/item_album"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/home_today_music_total_tv">
-            
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp">
-                    
-                    <ImageView
-                        android:id="@+id/home_today_album_cover_img_01_iv"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/img_album_exp2"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
-                    
-                    <ImageView
-                        android:id="@+id/home_today_album_play_img_01_iv"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="4dp"
-                        android:layout_marginBottom="5dp"
-                        android:src="@drawable/widget_black_play"
-                        app:layout_constraintBottom_toBottomOf="@+id/home_today_album_cover_img_01_iv"
-                        app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/home_today_music_total_tv"/>
 
-                    <TextView
-                        android:id="@+id/home_today_album_title_img_01_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="LILAC"
-                        android:textColor="@color/black"
-                        android:textSize="15sp"
-                        android:maxLines="1"
-                        android:ellipsize="end"
-                        app:layout_constraintStart_toStartOf="@id/home_today_album_cover_img_01_iv"
-                        app:layout_constraintTop_toBottomOf="@id/home_today_album_cover_img_01_iv" />
+<!--        <HorizontalScrollView-->
+<!--            android:id="@+id/home_today_music_album_sv"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_marginBottom="20dp"-->
+<!--            android:overScrollMode="never"-->
+<!--            android:scrollbars="none"-->
+<!--            android:orientation="horizontal"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/home_today_music_total_tv">-->
+<!--            -->
+<!--            <LinearLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal">-->
+<!--                -->
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="20dp">-->
+<!--                    -->
+<!--                    <ImageView-->
+<!--                        android:id="@+id/home_today_album_cover_img_01_iv"-->
+<!--                        android:layout_width="150dp"-->
+<!--                        android:layout_height="150dp"-->
+<!--                        android:scaleType="fitCenter"-->
+<!--                        android:src="@drawable/img_album_exp2"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"/>-->
+<!--                    -->
+<!--                    <ImageView-->
+<!--                        android:id="@+id/home_today_album_play_img_01_iv"-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_marginEnd="4dp"-->
+<!--                        android:layout_marginBottom="5dp"-->
+<!--                        android:src="@drawable/widget_black_play"-->
+<!--                        app:layout_constraintBottom_toBottomOf="@+id/home_today_album_cover_img_01_iv"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"/>-->
 
-                    <TextView
-                        android:id="@+id/home_today_album_singer_01_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:text="아이유 (IU)"
-                        android:textColor="#a8a8a8"
-                        android:textSize="12sp"
-                        app:layout_constraintStart_toStartOf="@id/home_today_album_title_img_01_tv"
-                        app:layout_constraintTop_toBottomOf="@id/home_today_album_title_img_01_tv" />
-                    
-                </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                    <TextView-->
+<!--                        android:id="@+id/home_today_album_title_img_01_tv"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="10dp"-->
+<!--                        android:text="LILAC"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="15sp"-->
+<!--                        android:maxLines="1"-->
+<!--                        android:ellipsize="end"-->
+<!--                        app:layout_constraintStart_toStartOf="@id/home_today_album_cover_img_01_iv"-->
+<!--                        app:layout_constraintTop_toBottomOf="@id/home_today_album_cover_img_01_iv" />-->
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp">
+<!--                    <TextView-->
+<!--                        android:id="@+id/home_today_album_singer_01_tv"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="3dp"-->
+<!--                        android:text="아이유 (IU)"-->
+<!--                        android:textColor="#a8a8a8"-->
+<!--                        android:textSize="12sp"-->
+<!--                        app:layout_constraintStart_toStartOf="@id/home_today_album_title_img_01_tv"-->
+<!--                        app:layout_constraintTop_toBottomOf="@id/home_today_album_title_img_01_tv" />-->
+<!--                    -->
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
 
-                    <ImageView
-                        android:id="@+id/home_today_album_cover_img_02_iv"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/img_album_exp2"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="20dp">-->
 
-                    <ImageView
-                        android:id="@+id/home_today_album_play_img_02_iv"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="4dp"
-                        android:layout_marginBottom="5dp"
-                        android:src="@drawable/widget_black_play"
-                        app:layout_constraintBottom_toBottomOf="@+id/home_today_album_cover_img_02_iv"
-                        app:layout_constraintEnd_toEndOf="parent"/>
+<!--                    <ImageView-->
+<!--                        android:id="@+id/home_today_album_cover_img_02_iv"-->
+<!--                        android:layout_width="150dp"-->
+<!--                        android:layout_height="150dp"-->
+<!--                        android:scaleType="fitCenter"-->
+<!--                        android:src="@drawable/img_album_exp2"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"/>-->
 
-                    <TextView
-                        android:id="@+id/home_today_album_title_img_02_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="LILAC"
-                        android:textColor="@color/black"
-                        android:textSize="15sp"
-                        android:maxLines="1"
-                        android:ellipsize="end"
-                        app:layout_constraintStart_toStartOf="@id/home_today_album_cover_img_02_iv"
-                        app:layout_constraintTop_toBottomOf="@id/home_today_album_cover_img_02_iv" />
+<!--                    <ImageView-->
+<!--                        android:id="@+id/home_today_album_play_img_02_iv"-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_marginEnd="4dp"-->
+<!--                        android:layout_marginBottom="5dp"-->
+<!--                        android:src="@drawable/widget_black_play"-->
+<!--                        app:layout_constraintBottom_toBottomOf="@+id/home_today_album_cover_img_02_iv"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"/>-->
 
-                    <TextView
-                        android:id="@+id/home_today_album_singer_02_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:text="아이유 (IU)"
-                        android:textColor="#a8a8a8"
-                        android:textSize="12sp"
-                        app:layout_constraintStart_toStartOf="@id/home_today_album_title_img_02_tv"
-                        app:layout_constraintTop_toBottomOf="@id/home_today_album_title_img_02_tv" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/home_today_album_title_img_02_tv"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="10dp"-->
+<!--                        android:text="LILAC"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="15sp"-->
+<!--                        android:maxLines="1"-->
+<!--                        android:ellipsize="end"-->
+<!--                        app:layout_constraintStart_toStartOf="@id/home_today_album_cover_img_02_iv"-->
+<!--                        app:layout_constraintTop_toBottomOf="@id/home_today_album_cover_img_02_iv" />-->
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                    <TextView-->
+<!--                        android:id="@+id/home_today_album_singer_02_tv"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="3dp"-->
+<!--                        android:text="아이유 (IU)"-->
+<!--                        android:textColor="#a8a8a8"-->
+<!--                        android:textSize="12sp"-->
+<!--                        app:layout_constraintStart_toStartOf="@id/home_today_album_title_img_02_tv"-->
+<!--                        app:layout_constraintTop_toBottomOf="@id/home_today_album_title_img_02_tv" />-->
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp">
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
 
-                    <ImageView
-                        android:id="@+id/home_today_album_cover_img_03_iv"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/img_album_exp2"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="20dp">-->
 
-                    <ImageView
-                        android:id="@+id/home_today_album_play_img_03_iv"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="4dp"
-                        android:layout_marginBottom="5dp"
-                        android:src="@drawable/widget_black_play"
-                        app:layout_constraintBottom_toBottomOf="@+id/home_today_album_cover_img_03_iv"
-                        app:layout_constraintEnd_toEndOf="parent"/>
+<!--                    <ImageView-->
+<!--                        android:id="@+id/home_today_album_cover_img_03_iv"-->
+<!--                        android:layout_width="150dp"-->
+<!--                        android:layout_height="150dp"-->
+<!--                        android:scaleType="fitCenter"-->
+<!--                        android:src="@drawable/img_album_exp2"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"/>-->
 
-                    <TextView
-                        android:id="@+id/home_today_album_title_img_03_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="LILAC"
-                        android:textColor="@color/black"
-                        android:textSize="15sp"
-                        android:maxLines="1"
-                        android:ellipsize="end"
-                        app:layout_constraintStart_toStartOf="@id/home_today_album_cover_img_03_iv"
-                        app:layout_constraintTop_toBottomOf="@id/home_today_album_cover_img_03_iv" />
+<!--                    <ImageView-->
+<!--                        android:id="@+id/home_today_album_play_img_03_iv"-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_marginEnd="4dp"-->
+<!--                        android:layout_marginBottom="5dp"-->
+<!--                        android:src="@drawable/widget_black_play"-->
+<!--                        app:layout_constraintBottom_toBottomOf="@+id/home_today_album_cover_img_03_iv"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"/>-->
 
-                    <TextView
-                        android:id="@+id/home_today_album_singer_03_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:text="아이유 (IU)"
-                        android:textColor="#a8a8a8"
-                        android:textSize="12sp"
-                        app:layout_constraintStart_toStartOf="@id/home_today_album_title_img_03_tv"
-                        app:layout_constraintTop_toBottomOf="@id/home_today_album_title_img_03_tv" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/home_today_album_title_img_03_tv"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="10dp"-->
+<!--                        android:text="LILAC"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="15sp"-->
+<!--                        android:maxLines="1"-->
+<!--                        android:ellipsize="end"-->
+<!--                        app:layout_constraintStart_toStartOf="@id/home_today_album_cover_img_03_iv"-->
+<!--                        app:layout_constraintTop_toBottomOf="@id/home_today_album_cover_img_03_iv" />-->
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </LinearLayout>
+<!--                    <TextView-->
+<!--                        android:id="@+id/home_today_album_singer_03_tv"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="3dp"-->
+<!--                        android:text="아이유 (IU)"-->
+<!--                        android:textColor="#a8a8a8"-->
+<!--                        android:textSize="12sp"-->
+<!--                        app:layout_constraintStart_toStartOf="@id/home_today_album_title_img_03_tv"-->
+<!--                        app:layout_constraintTop_toBottomOf="@id/home_today_album_title_img_03_tv" />-->
+
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--            </LinearLayout>-->
 
 
-        </HorizontalScrollView>
+<!--        </HorizontalScrollView>-->
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/home_banner_vp"
@@ -414,7 +424,7 @@
             android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/home_today_music_album_sv"/>
+            app:layout_constraintTop_toBottomOf="@id/home_today_music_album_rv"/>
 
 <!--        <ImageView-->
 <!--            android:id="@+id/home_banner_vp"-->

@@ -42,6 +42,7 @@ class AlbumFragment : Fragment() {
         return binding.root
     }
 
+    // 초기화
     private fun setInit(album: Album){
         binding.albumAlbumIv.setImageResource(album.coverImg!!)
         binding.albumMusicTitleTv.text = album.title.toString()

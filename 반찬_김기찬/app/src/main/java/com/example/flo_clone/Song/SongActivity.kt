@@ -4,9 +4,11 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
 import com.example.flo_clone.databinding.ActivitySongBinding
 import com.google.gson.Gson
+import java.text.SimpleDateFormat
 import java.util.Timer
 
 class SongActivity : AppCompatActivity(){
@@ -46,6 +48,7 @@ class SongActivity : AppCompatActivity(){
             song = Song(
                 intent.getStringExtra("title")!!,
                 intent.getStringExtra("singer")!!,
+                intent.getIntExtra("coverImg", 0),
                 intent.getIntExtra("second", 0),
                 intent.getIntExtra("playTime", 0),
                 intent.getBooleanExtra("isPlaying", false),
@@ -63,7 +66,31 @@ class SongActivity : AppCompatActivity(){
         binding.songSeekbarSb.progress = (song.second * 1000 / song.playTime)
         val music = resources.getIdentifier(song.music, "raw", this.packageName)
         mediaPlayer = MediaPlayer.create(this, music)
+        val timeformat = SimpleDateFormat("mm:ss")
+        binding.songEndTv.text = timeformat.format(mediaPlayer?.duration)
 
+
+//        binding.songSeekbarSb.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+//            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+//                if (fromUser) {
+//                    binding.songStartTv.text = String.format(
+//                        "%d:%02d",
+//                        mediaPlayer?.currentPosition?:0 / 60000,
+//                        (mediaPlayer?.currentPosition?:0 - 60000 * (mediaPlayer?.currentPosition?:0 / 60000)) / 1000
+//                    )
+//
+//
+//                    mediaPlayer?.seekTo(progress)
+//                }
+//            }
+//
+//            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+//            }
+//
+//            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+//            }
+//
+//        })
         setPlayerStatus(song.isPlaying)
     }
 

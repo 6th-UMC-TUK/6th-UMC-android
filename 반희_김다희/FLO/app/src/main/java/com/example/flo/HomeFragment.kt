@@ -13,7 +13,7 @@ import com.google.gson.Gson
 class HomeFragment : Fragment() {
 
     lateinit var binding: FragmentHomeBinding
-     ivate var albumDatas = ArrayList<Album>()
+    private var albumDatas = ArrayList<Album>()
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -10,7 +10,6 @@ import com.example.flo.databinding.FragmentSongBinding
 class SongFragment : Fragment() {
 
     lateinit var binding: FragmentSongBinding
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

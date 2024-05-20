@@ -3,6 +3,7 @@ package com.example.memo
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -35,11 +36,30 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         binding.btnAdd.setOnClickListener {
-            val mintent = Intent(this@MainActivity, MemoActivity::class.java)
-            getResultText.launch(mintent)
+            val intent = Intent(this, MemoActivity::class.java)
+            getResultText.launch(intent)
         }
         binding.rvData.layoutManager = LinearLayoutManager(this) // 레이아웃 매니저 연결
         adapter = DataAdapter(dataList)
         binding.rvData.adapter = adapter
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Toast.makeText(this, "onResume", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Toast.makeText(this,"onPause", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        showRestartDialog()
+        Toast.makeText(this, "onRestart",Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showRestartDialog(){
     }
 }
