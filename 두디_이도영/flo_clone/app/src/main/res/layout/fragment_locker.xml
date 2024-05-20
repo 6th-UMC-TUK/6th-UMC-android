@@ -6,16 +6,16 @@
 
     <TextView
         android:id="@+id/locker_locker_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="61dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
         android:text="보관함"
+        android:textColor="@color/black"
         android:textSize="25dp"
         android:textStyle="bold"
-        android:textColor="@color/black"
-        android:layout_marginTop="50dp"
-        android:layout_marginStart="30dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/locker_login_tv"
@@ -31,7 +31,7 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/locker_seg_tb"
-        android:layout_width="170dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:tabIndicatorFullWidth="false"
         app:tabSelectedTextColor="@color/flo"
