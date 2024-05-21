@@ -1,5 +1,6 @@
 package com.example.flo
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +13,12 @@ class AlbumRVAdapter(private val albumList: ArrayList<Album>) : RecyclerView.Ada
     interface MyItemClickListener{
         fun onItemClick(album: Album)
         fun onRemoveAlbum(position: Int)
+        fun onPlayAlbum(album: Album)
+    }
+
+    // Fragment와 그 Fragment를 호스팅 중인 Activity 간의 통신을 위한 Interface
+    interface CommunicationInterface {
+        fun sendData(album: Album)
     }
 
     // 리스너 객체를 전달받는 함수, 리스너 객체를 저장할 변수
@@ -42,8 +49,21 @@ class AlbumRVAdapter(private val albumList: ArrayList<Album>) : RecyclerView.Ada
     // 뷰홀더에 데이터를 바인딩해줘야 할 때마다 호출되는 함수 => 엄청나게 많이 호출
     override fun onBindViewHolder(holder: AlbumRVAdapter.ViewHolder, position: Int) {
         holder.bind(albumList[position])
-        holder.itemView.setOnClickListener { mItemClickListener.onItemClick(albumList[position]) }
-//        holder.binding.itemAlbumTitleTv.setOnClickListener { mItemClickListener.onRemoveAlbum(position) } // 타이틀 누르면 삭제
+
+        // 타이틀 누르면 삭제되는 클릭 이벤트
+        // holder.binding.itemAlbumTitleTv.setOnClickListener { mItemClickListener.onRemoveAlbum(position) }
+
+        holder.itemView.setOnClickListener {
+            mItemClickListener.onItemClick(albumList[position])
+        }
+
+        // 앨범의 재생 버튼 클릭 이벤트 리스너 => miniPlayer에 해당 앨범 제목, 가수 표시
+        holder.binding.itemAlbumPlayImgIv.setOnClickListener {
+            Log.d("AlbumRVAdapter", "Play button clicked for album: ${albumList[position].title}")
+            // OK
+
+            mItemClickListener.onItemClick(albumList[position])
+        }
     }
 
     // 데이터 세트 크기를 알려주는 함수 => 리사이클러뷰의 마지막이 언제인지를 알게 됨

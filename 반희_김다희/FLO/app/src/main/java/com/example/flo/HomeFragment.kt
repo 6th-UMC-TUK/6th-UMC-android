@@ -1,6 +1,7 @@
 package com.example.flo
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.flo.databinding.FragmentHomeBinding
 import com.google.gson.Gson
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), AlbumRVAdapter.CommunicationInterface {
 
     lateinit var binding: FragmentHomeBinding
     private var albumDatas = ArrayList<Album>()
@@ -50,6 +51,10 @@ class HomeFragment : Fragment() {
             override fun onRemoveAlbum(position: Int) {
                 albumRVAdapter.removeItem(position)
             }
+
+            override fun onPlayAlbum(album: Album) {
+                sendData(album)
+            }
         })
 
         val bannerAdapter = BannerVPAdapter(this)
@@ -71,6 +76,16 @@ class HomeFragment : Fragment() {
                 }
             })
             .commitAllowingStateLoss()
+    }
+
+    override fun sendData(album: Album) {
+
+        Log.d("HomeFragment", "sendData called with album: ${album.title}")
+        // 안됨
+
+        (activity as? MainActivity)?.let {
+            it.updateMiniPlayerCl(album)
+        }
     }
 
 
