@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
         val music = resources.getIdentifier(song.music, "raw", this.packageName)
         mediaPlayer = MediaPlayer.create(this, music)
 
-        val timeformat = SimpleDateFormat("mm:ss")
+//        val timeformat = SimpleDateFormat("mm:ss")
 //        binding.songStartTimeTv.text = timeformat.format(mediaPlayer?.currentPosition)
 //        binding.songEndTimeTv.text = timeformat.format(mediaPlayer?.duration)
 //        binding.songStartTimeTv.text =  String.format("%02d:%02d", song.second / 60, song.second %60)
