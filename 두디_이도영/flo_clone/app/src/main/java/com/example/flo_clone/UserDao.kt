@@ -1,8 +1,10 @@
 package com.example.flo_clone
 
+import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 
+@Dao
 interface UserDao {
     // 유저에 대한 정보를 담을 수 있도록 insert 사용
     @Insert

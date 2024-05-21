@@ -75,7 +75,7 @@ class HomeFragment() : Fragment() {
             }
 
             override fun onRemoveAlbum(position: Int) {
-                albumRVAdapter.removeIten(position)
+                albumRVAdapter.removeItem(position)
             }
         })
 

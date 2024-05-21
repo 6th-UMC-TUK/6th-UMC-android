@@ -41,9 +41,9 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         val userDB = SongDatabase.getInstance(this)!!
-        userDB.UserDao().insert(getUser())
+        userDB.userDao().insert(getUser())
 
-        val users = userDB.UserDao().getUsers()
+        val users = userDB.userDao().getUsers()
 
         Log.d("SIGNUPACT", users.toString())
     }
