@@ -74,9 +74,10 @@ class SongActivity : AppCompatActivity(){
 //            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
 //                if (fromUser) {
 //                    binding.songStartTv.text = String.format(
-//                        "%d:%02d",
-//                        mediaPlayer?.currentPosition?:0 / 60000,
-//                        (mediaPlayer?.currentPosition?:0 - 60000 * (mediaPlayer?.currentPosition?:0 / 60000)) / 1000
+//                        "%02d:%02d",
+//                        mediaPlayer?.currentPosition ?: (0 / 60000),
+//                        (mediaPlayer?.currentPosition ?: (0 - 60000 * (mediaPlayer?.currentPosition
+//                            ?: (0 / 60000)))) / 1000
 //                    )
 //
 //
@@ -162,11 +163,27 @@ class SongActivity : AppCompatActivity(){
         editor.apply()
     }
 
+    override fun onStart() {
+        super.onStart()
+        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
+        val songJson = sharedPreferences.getString("songData", null)
+        song = if (songJson == null) {
+            Song("라일락", "아이유 (IU)", 0, 0,214, false, "music_lilac")
+        } else {
+            gson.fromJson(songJson, Song::class.java)
+        }
+//        val currentPosition = mediaPlayer?.currentPosition
+//        mediaPlayer?.seekTo(song.playTime)
+        binding.songSeekbarSb.progress = song.playTime
+
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         timer.interrupt()
         mediaPlayer?.release() // 미디어 플레이어가 갖고 있던 리소스 해제
         mediaPlayer = null // 미디어 플레이어 해제
+        Log.d("destroy","디스트로이 발생")
     }
 
 }
