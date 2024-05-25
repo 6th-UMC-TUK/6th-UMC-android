@@ -4,6 +4,7 @@ import android.content.Intent
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.flo_clone.Home.HomeFragment
@@ -51,6 +52,7 @@ class MainActivity : AppCompatActivity() {
 
         initClickListener()
         initBottomNavigation()
+        inputDummySongs()
 
     }
 
@@ -105,7 +107,93 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun inputDummySongs() {
-        val songDB = SongDatabase.getInstance(this)
+        val songDB = SongDatabase.getInstance(this)!!
+        val songs = songDB.songDao().getSongs()
+
+        if (songs.isNotEmpty()) return
+
+        songDB.songDao().insert(
+            Song(
+                "Lilac",
+                "아이유 (IU)",
+                R.drawable.img_album_exp2,
+                0,
+                214,
+                false,
+                "music_lilac",
+                false,
+            )
+        )
+
+        songDB.songDao().insert(
+            Song(
+                "Flu",
+                "아이유 (IU)",
+                R.drawable.img_album_exp2,
+                0,
+                190,
+                false,
+                "music_flu",
+                false,
+            )
+        )
+
+        songDB.songDao().insert(
+            Song(
+                "Butter",
+                "방탄소년단 (BTS)",
+                R.drawable.img_album_exp,
+                0,
+                182,
+                false,
+                "music_butter",
+                false,
+            )
+        )
+
+        songDB.songDao().insert(
+            Song(
+                "Next Level",
+                "에스파 (AESPA)",
+                R.drawable.img_album_exp3,
+                0,
+                237,
+                false,
+                "music_next",
+                false,
+            )
+        )
+
+
+        songDB.songDao().insert(
+            Song(
+                "Boy with Luv",
+                "music_boy",
+                R.drawable.img_album_exp4,
+                0,
+                253,
+                false,
+                "music_boy",
+                false,
+            )
+        )
+
+
+        songDB.songDao().insert(
+            Song(
+                "BBoom BBoom",
+                "모모랜드 (MOMOLAND)",
+                R.drawable.img_album_exp5,
+                0,
+                211,
+                false,
+                "music_bboom",
+                false,
+            )
+        )
+        val _songs = songDB.songDao().getSongs()
+        Log.d("DB data", _songs.toString())
+
     }
 
     override fun onDestroy() {
