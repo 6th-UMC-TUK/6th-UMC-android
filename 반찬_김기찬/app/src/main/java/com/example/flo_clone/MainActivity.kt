@@ -22,8 +22,10 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
 
-    private var song: Song = Song()
     private var gson: Gson = Gson()
+    val songs = arrayListOf<Song>()
+    lateinit var songDB: SongDatabase
+    var nowPos = 0
 
     private var mediaPlayer: MediaPlayer? = null
 
@@ -36,25 +38,16 @@ class MainActivity : AppCompatActivity() {
 
         inputDummySongs()
         initClickListener()
+        initPlayList()
         initBottomNavigation()
 
-//        val song = Song(binding.mainMiniplayerTitleTv.text.toString(), binding.mainMiniplayerSingerTv.text.toString(), 0, 60, false, "music_lilac")
-
         binding.mainPlayerCl.setOnClickListener {
-//            val intent = Intent(this, SongActivity::class.java)
-//            intent.putExtra("title", song.title)
-//            intent.putExtra("singer", song.singer)
-//            intent.putExtra("coverImg", song.coverImg)
-//            intent.putExtra("second", song.second)
-//            intent.putExtra("playTime", song.playTime)
-//            intent.putExtra("isPlaying", song.isPlaying)
-//            intent.putExtra("music", song.music)
-//
-//            startActivity(intent)
             val editor = getSharedPreferences("song", MODE_PRIVATE).edit()
-            editor.putInt("songId", song.id)
+            editor.putInt("songId", songs[nowPos].id)
             editor.apply()
 
+            mediaPlayer?.release() // 미디어 플레이어가 갖고 있던 리소스 해제
+            mediaPlayer = null // 미디어 플레이어 해제
             val intent = Intent(this, SongActivity::class.java)
             startActivity(intent)
         }
@@ -63,15 +56,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-//        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
-//        val songJson = sharedPreferences.getString("songData", null)
-//
-//        song = if (songJson == null) {
-//            Song("라일락", "아이유 (IU)", 0, 0,214, false, "music_lilac")
-//        } else {
-//            gson.fromJson(songJson, Song::class.java)
-//        }
-
         val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
         // songId는 SongActivity에서 onPause가 호출되었을 때
         // 재생 중이던 노래의 id(pk)이다.
@@ -80,14 +64,14 @@ class MainActivity : AppCompatActivity() {
         // SongDatabase의 인스턴스를 가져온다.
         val songDB = SongDatabase.getInstance(this)!!
 
-        song = if (songId == 0) { // 재생 중이던 노래가 없었으면
+        songs[nowPos] = if (songId == 0) { // 재생 중이던 노래가 없었으면
             songDB.songDao().getSong(1)
         } else { // 재생 중이던 노래가 있었으면
             songDB.songDao().getSong(songId)
         }
 
-        Log.d("song ID", song.id.toString())
-        setMiniPlayer(song) // song의 정보로 MiniPlayer를 setting
+        Log.d("song ID", songs[nowPos].id.toString())
+        setMiniPlayer(songs[nowPos]) // song의 정보로 MiniPlayer를 setting
     }
     private fun initClickListener() {
         binding.mainMiniplayBtn.setOnClickListener {
@@ -102,19 +86,54 @@ class MainActivity : AppCompatActivity() {
         if(isPlaying) {
             binding.mainMiniplayBtn.visibility = View.GONE
             binding.mainPauseBtn.visibility = View.VISIBLE
-//            mediaPlayer?.start()
+            mediaPlayer?.start()
         } else {
             binding.mainMiniplayBtn.visibility = View.VISIBLE
             binding.mainPauseBtn.visibility = View.GONE
-//            if (mediaPlayer?.isPlaying == true) {
-//                mediaPlayer?.pause()
-//            }
+            if (mediaPlayer?.isPlaying == true) {
+                mediaPlayer?.pause()
+            }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
+        val songId = sharedPreferences.getInt("songId", 0)
+
+        nowPos = getPlayingSongPosition(songId)
+        setMiniPlayer(songs[nowPos])
+    }
+
+    private fun getPlayingSongPosition(songId: Int): Int{
+        for (i in 0 until songs.size){
+            if (songs[i].id == songId){
+                return i
+            }
+        }
+        return 0
+    }
+
+    private fun initPlayList(){
+        songDB = SongDatabase.getInstance(this)!!
+        songs.addAll(songDB.songDao().getSongs())
     }
     private fun setMiniPlayer(song: Song) {
         binding.mainMiniplayerTitleTv.text = song.title
         binding.mainMiniplayerSingerTv.text = song.singer
+        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
+        val second = sharedPreferences.getInt("second", 0)
+        Log.d("spfSecond", second.toString())
+
         binding.mainSeekbarSb.progress = (song.second * 100000) / song.playTime
+
+
+
+//        val music = resources.getIdentifier(song.music, "raw", this.packageName)
+//        mediaPlayer = MediaPlayer.create(this, music)
+
+
 //        while (mediaPlayer?.isPlaying == true) {
 //            runOnUiThread{
 //                binding.mainSeekbarSb.progress = mediaPlayer!!.currentPosition
@@ -218,14 +237,6 @@ class MainActivity : AppCompatActivity() {
         Log.d("DB data", _songs.toString())
 
     }
-
-//    override fun onDestroy() {
-//        super.onDestroy()
-//        timer.interrupt()
-//        mediaPlayer?.release() // 미디어 플레이어가 갖고 있던 리소스 해제
-//        mediaPlayer = null // 미디어 플레이어 해제
-//    }
-
 
     private fun initBottomNavigation(){
 
