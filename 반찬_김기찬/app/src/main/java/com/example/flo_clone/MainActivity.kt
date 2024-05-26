@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
 
     private var song: Song = Song()
     private var gson: Gson = Gson()
-    lateinit var timer : SongActivity.Timer
 
     private var mediaPlayer: MediaPlayer? = null
 
@@ -35,40 +34,60 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        inputDummySongs()
+        initClickListener()
+        initBottomNavigation()
+
 //        val song = Song(binding.mainMiniplayerTitleTv.text.toString(), binding.mainMiniplayerSingerTv.text.toString(), 0, 60, false, "music_lilac")
 
         binding.mainPlayerCl.setOnClickListener {
-            val intent = Intent(this, SongActivity::class.java)
-            intent.putExtra("title", song.title)
-            intent.putExtra("singer", song.singer)
-            intent.putExtra("coverImg", song.coverImg)
-            intent.putExtra("second", song.second)
-            intent.putExtra("playTime", song.playTime)
-            intent.putExtra("isPlaying", song.isPlaying)
-            intent.putExtra("music", song.music)
+//            val intent = Intent(this, SongActivity::class.java)
+//            intent.putExtra("title", song.title)
+//            intent.putExtra("singer", song.singer)
+//            intent.putExtra("coverImg", song.coverImg)
+//            intent.putExtra("second", song.second)
+//            intent.putExtra("playTime", song.playTime)
+//            intent.putExtra("isPlaying", song.isPlaying)
+//            intent.putExtra("music", song.music)
+//
+//            startActivity(intent)
+            val editor = getSharedPreferences("song", MODE_PRIVATE).edit()
+            editor.putInt("songId", song.id)
+            editor.apply()
 
+            val intent = Intent(this, SongActivity::class.java)
             startActivity(intent)
         }
-
-        initClickListener()
-        initBottomNavigation()
-        inputDummySongs()
 
     }
 
     override fun onStart() {
         super.onStart()
-        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
-        val songJson = sharedPreferences.getString("songData", null)
+//        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
+//        val songJson = sharedPreferences.getString("songData", null)
+//
+//        song = if (songJson == null) {
+//            Song("라일락", "아이유 (IU)", 0, 0,214, false, "music_lilac")
+//        } else {
+//            gson.fromJson(songJson, Song::class.java)
+//        }
 
-        song = if (songJson == null) {
-            Song("라일락", "아이유 (IU)", 0, 0,214, false, "music_lilac")
-        } else {
-            gson.fromJson(songJson, Song::class.java)
+        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
+        // songId는 SongActivity에서 onPause가 호출되었을 때
+        // 재생 중이던 노래의 id(pk)이다.
+        val songId = sharedPreferences.getInt("songId", 0)
+
+        // SongDatabase의 인스턴스를 가져온다.
+        val songDB = SongDatabase.getInstance(this)!!
+
+        song = if (songId == 0) { // 재생 중이던 노래가 없었으면
+            songDB.songDao().getSong(1)
+        } else { // 재생 중이던 노래가 있었으면
+            songDB.songDao().getSong(songId)
         }
 
-       setMiniPlayer(song)
-
+        Log.d("song ID", song.id.toString())
+        setMiniPlayer(song) // song의 정보로 MiniPlayer를 setting
     }
     private fun initClickListener() {
         binding.mainMiniplayBtn.setOnClickListener {
@@ -83,13 +102,13 @@ class MainActivity : AppCompatActivity() {
         if(isPlaying) {
             binding.mainMiniplayBtn.visibility = View.GONE
             binding.mainPauseBtn.visibility = View.VISIBLE
-            mediaPlayer?.start()
+//            mediaPlayer?.start()
         } else {
             binding.mainMiniplayBtn.visibility = View.VISIBLE
             binding.mainPauseBtn.visibility = View.GONE
-            if (mediaPlayer?.isPlaying == true) {
-                mediaPlayer?.pause()
-            }
+//            if (mediaPlayer?.isPlaying == true) {
+//                mediaPlayer?.pause()
+//            }
         }
     }
     private fun setMiniPlayer(song: Song) {
@@ -103,24 +122,26 @@ class MainActivity : AppCompatActivity() {
 //        }
 //        val music = resources.getIdentifier(song.music, "raw", this.packageName)
 //        mediaPlayer = MediaPlayer.create(this, music)
-        setPlayerStatus(song.isPlaying)
+//        setPlayerStatus(song.isPlaying)
     }
 
     private fun inputDummySongs() {
         val songDB = SongDatabase.getInstance(this)!!
         val songs = songDB.songDao().getSongs()
 
+        // songs에 데이터가 이미 존재해 더미 데이터를 삽입할 필요가 없음
         if (songs.isNotEmpty()) return
 
+        // songs에 데이터가 없을 때에는 더미 데이터를 삽입해주어야 함
         songDB.songDao().insert(
             Song(
                 "Lilac",
                 "아이유 (IU)",
-                R.drawable.img_album_exp2,
                 0,
                 214,
                 false,
                 "music_lilac",
+                R.drawable.img_album_exp2,
                 false,
             )
         )
@@ -129,11 +150,11 @@ class MainActivity : AppCompatActivity() {
             Song(
                 "Flu",
                 "아이유 (IU)",
-                R.drawable.img_album_exp2,
                 0,
                 190,
                 false,
                 "music_flu",
+                R.drawable.img_album_exp2,
                 false,
             )
         )
@@ -142,11 +163,11 @@ class MainActivity : AppCompatActivity() {
             Song(
                 "Butter",
                 "방탄소년단 (BTS)",
-                R.drawable.img_album_exp,
                 0,
                 182,
                 false,
                 "music_butter",
+                R.drawable.img_album_exp,
                 false,
             )
         )
@@ -155,11 +176,11 @@ class MainActivity : AppCompatActivity() {
             Song(
                 "Next Level",
                 "에스파 (AESPA)",
-                R.drawable.img_album_exp3,
                 0,
                 237,
                 false,
                 "music_next",
+                R.drawable.img_album_exp3,
                 false,
             )
         )
@@ -169,11 +190,11 @@ class MainActivity : AppCompatActivity() {
             Song(
                 "Boy with Luv",
                 "music_boy",
-                R.drawable.img_album_exp4,
                 0,
                 253,
                 false,
                 "music_boy",
+                R.drawable.img_album_exp4,
                 false,
             )
         )
@@ -183,25 +204,27 @@ class MainActivity : AppCompatActivity() {
             Song(
                 "BBoom BBoom",
                 "모모랜드 (MOMOLAND)",
-                R.drawable.img_album_exp5,
                 0,
                 211,
                 false,
                 "music_bboom",
+                R.drawable.img_album_exp5,
                 false,
             )
         )
+
+        // DB에 데이터가 잘 들어갔는지 확인
         val _songs = songDB.songDao().getSongs()
         Log.d("DB data", _songs.toString())
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        timer.interrupt()
-        mediaPlayer?.release() // 미디어 플레이어가 갖고 있던 리소스 해제
-        mediaPlayer = null // 미디어 플레이어 해제
-    }
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        timer.interrupt()
+//        mediaPlayer?.release() // 미디어 플레이어가 갖고 있던 리소스 해제
+//        mediaPlayer = null // 미디어 플레이어 해제
+//    }
 
 
     private fun initBottomNavigation(){

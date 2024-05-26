@@ -26,7 +26,9 @@ RecyclerView.Adapter<AlbumRVAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: AlbumRVAdapter.ViewHolder, position: Int) {
         holder.bind(albumList[position])
-        holder.itemView.setOnClickListener { mItemClickListener.onItemClick(albumList[position]) }
+        holder.itemView.setOnClickListener {
+            mItemClickListener.onItemClick(albumList[position])
+        }
     }
 
     override fun getItemCount(): Int = albumList.size
