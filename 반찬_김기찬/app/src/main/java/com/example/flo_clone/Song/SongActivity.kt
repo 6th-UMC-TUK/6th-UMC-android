@@ -7,8 +7,10 @@ import android.view.View
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.flo_clone.Function.CustomSnackbar
 import com.example.flo_clone.R
 import com.example.flo_clone.databinding.ActivitySongBinding
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import java.text.SimpleDateFormat
 import java.util.Timer
@@ -56,7 +58,10 @@ class SongActivity : AppCompatActivity(){
             moveSong(-1)
         }
         binding.songLikeOffIv.setOnClickListener {
-            setLike(songs[nowPos].isLike)
+            setLike(true)
+        }
+        binding.songLikeOnIv.setOnClickListener {
+            setLike(false)
         }
     }
     private fun initSong() {
@@ -77,8 +82,8 @@ class SongActivity : AppCompatActivity(){
 
         Log.d("now Song ID", songs[nowPos].id.toString())
 
-//        startTimer()
-//        setPlayer(songs[nowPos])
+        startTimer()
+        setPlayer(songs[nowPos])
     }
 
     // songId로 position을 얻는 메서드
@@ -141,6 +146,7 @@ class SongActivity : AppCompatActivity(){
         binding.songSeekbarSb.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 if (fromUser) {
+                    timer.interrupt()
                     val newSecond = (progress * song.playTime) / 100
                     mediaPlayer?.seekTo(newSecond * 1000)
                     binding.songStartTv.text = String.format("%02d:%02d", newSecond / 60, newSecond % 60)
@@ -157,33 +163,36 @@ class SongActivity : AppCompatActivity(){
                 // 사용자가 터치를 끝냈을 때 호출
                 if (songs[nowPos].isPlaying) {
                     mediaPlayer?.start()
+                    startTimer()
                 }
             }
 
         })
 
-//        Log.d("nowPosSecond", timer.getSecond().toString())
-//        Log.d("playtime", song.playTime.toString())
-//        if (timer.second() == song.playTime) {
-//            moveSong(+1)
-//        }
         if (song.isLike){
-            binding.songLikeOffIv.setImageResource(R.drawable.ic_my_like_on)
+            binding.songLikeOffIv.visibility = View.GONE
+            binding.songLikeOnIv.visibility = View.VISIBLE
         } else{
-            binding.songLikeOffIv.setImageResource(R.drawable.ic_my_like_off)
+            binding.songLikeOffIv.visibility = View.VISIBLE
+            binding.songLikeOnIv.visibility = View.GONE
         }
 
         setPlayerStatus(song.isPlaying)
     }
 
     private fun setLike(isLike: Boolean){
-        songs[nowPos].isLike = !isLike
-        songDB.songDao().updateIsLikeById(!isLike,songs[nowPos].id)
+        songs[nowPos].isLike = isLike
+        songDB.songDao().updateIsLikeById(isLike,songs[nowPos].id)
 
-        if (!isLike){
-            binding.songLikeOffIv.setImageResource(R.drawable.ic_my_like_on)
+        if (isLike){
+            binding.songLikeOffIv.visibility = View.GONE
+            binding.songLikeOnIv.visibility = View.VISIBLE
+            CustomSnackbar.make(binding.root, "좋아요 한 곡에 담겼습니다.").setAnchorView(binding.songRelatedIv).show()
+
         } else{
-            binding.songLikeOffIv.setImageResource(R.drawable.ic_my_like_off)
+            binding.songLikeOffIv.visibility = View.VISIBLE
+            binding.songLikeOnIv.visibility = View.GONE
+            CustomSnackbar.make(binding.root, "좋아요 한 곡이 취소되었습니다.").setAnchorView(binding.songRelatedIv).show()
         }
 
     }
@@ -205,7 +214,7 @@ class SongActivity : AppCompatActivity(){
         }
     }
 
-    private fun startTimer() {
+    fun startTimer() {
         timer = Timer(songs[nowPos].playTime, songs[nowPos].isPlaying)
         timer.start()
     }
