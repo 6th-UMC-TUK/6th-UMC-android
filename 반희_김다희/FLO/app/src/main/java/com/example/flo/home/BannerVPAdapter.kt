@@ -1,4 +1,4 @@
-package com.example.flo
+package com.example.flo.home
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter

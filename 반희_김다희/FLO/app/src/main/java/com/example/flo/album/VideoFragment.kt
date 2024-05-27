@@ -1,21 +1,23 @@
-package com.example.flo
+package com.example.flo.album
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.flo.databinding.FragmentSongBinding
+import com.example.flo.databinding.FragmentDetailBinding
+import com.example.flo.databinding.FragmentVideoBinding
 
-class SongFragment : Fragment() {
+class VideoFragment : Fragment() {
 
-    lateinit var binding: FragmentSongBinding
+    lateinit var binding: FragmentVideoBinding
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentSongBinding.inflate(inflater,container,false)
+        binding = FragmentVideoBinding.inflate(inflater,container,false)
 
         return binding.root
     }

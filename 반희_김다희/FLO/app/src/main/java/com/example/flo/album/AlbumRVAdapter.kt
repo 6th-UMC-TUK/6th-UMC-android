@@ -1,4 +1,4 @@
-package com.example.flo
+package com.example.flo.album
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -40,14 +40,14 @@ class AlbumRVAdapter(private val albumList: ArrayList<Album>) : RecyclerView.Ada
     }
 
     // 뷰홀더를 생성해줘야 할 때 호출되는 함수 => 아이템 뷰 객체를 만들어서 뷰홀더에 던져줌
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): AlbumRVAdapter.ViewHolder {
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val binding: ItemAlbumBinding = ItemAlbumBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
 
         return ViewHolder(binding)
     }
 
     // 뷰홀더에 데이터를 바인딩해줘야 할 때마다 호출되는 함수 => 엄청나게 많이 호출
-    override fun onBindViewHolder(holder: AlbumRVAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(albumList[position])
 
         // 타이틀 누르면 삭제되는 클릭 이벤트

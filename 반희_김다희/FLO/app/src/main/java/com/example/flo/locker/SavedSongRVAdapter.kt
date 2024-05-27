@@ -1,13 +1,16 @@
-package com.example.flo
+package com.example.flo.locker
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flo.databinding.ItemSongBinding
+import com.example.flo.song.Song
 
 
-class SavedSongRVAdapter(private val songList: ArrayList<Song>) :
+class SavedSongRVAdapter() :
     RecyclerView.Adapter<SavedSongRVAdapter.ViewHolder>() {
+    private val songList = ArrayList<Song>()
 
     //클릭 인터페이스 정의
     interface MyItemClickListener {
@@ -20,17 +23,16 @@ class SavedSongRVAdapter(private val songList: ArrayList<Song>) :
         mItemClickListener = itemClickListener
     }
 
-//
-//    // 곡 저장
-//    fun addItem(songs: ArrayList<Song>) {
-//        this.songList.clear()
-//        this.songList.addAll(songs)
-//
-//        notifyDataSetChanged()
-//    }
+    @SuppressLint("NotifyDataSetChanged")
+    fun addSongs(songs: ArrayList<Song>) {
+        this.songList.clear()
+        this.songList.addAll(songs)
 
-    // 저장된 곡 삭제
-    fun removeItem(position: Int) {
+        notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun removeItem(position: Int){
         songList.removeAt(position)
         notifyDataSetChanged()
     }
@@ -39,17 +41,17 @@ class SavedSongRVAdapter(private val songList: ArrayList<Song>) :
     override fun onCreateViewHolder(
         viewGroup: ViewGroup,
         viewType: Int
-    ): SavedSongRVAdapter.ViewHolder {
+    ): ViewHolder {
         val binding: ItemSongBinding =
             ItemSongBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
 
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: SavedSongRVAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(songList[position])
         holder.binding.itemSongMoreIv.setOnClickListener {
-            mItemClickListener.onRemoveItem(position)
+            mItemClickListener.onRemoveItem(songList[position].id)
             removeItem(position)
         }
     }
