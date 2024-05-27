@@ -13,7 +13,8 @@ data class Song(
     var isPlaying : Boolean = false,
     var music : String = "",
     var coverImg: Int? = null,
-    var isLike : Boolean = false
+    var isLike : Boolean = false,
+    var albumIdx : Int = 0
 ){
     @PrimaryKey(autoGenerate = true) var id: Int = 0
 }

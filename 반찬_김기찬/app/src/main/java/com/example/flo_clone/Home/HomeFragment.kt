@@ -15,6 +15,7 @@ import com.example.flo_clone.Album.AlbumFragment
 import com.example.flo_clone.Album.AlbumRVAdapter
 import com.example.flo_clone.MainActivity
 import com.example.flo_clone.R
+import com.example.flo_clone.Song.SongDatabase
 import com.example.flo_clone.databinding.FragmentHomeBinding
 import com.google.gson.Gson
 
@@ -22,6 +23,7 @@ class HomeFragment : Fragment() {
 
     lateinit var binding: FragmentHomeBinding
     private var albumDatas = ArrayList<Album>()
+    private lateinit var songDB: SongDatabase
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,19 +37,27 @@ class HomeFragment : Fragment() {
 //                .replace(R.id.main_frm, AlbumFragment())
 //                .commitAllowingStateLoss()
 //        }
+        inputDummyAlbums()
 
-        albumDatas.apply {
-            add(Album("Butter", "방탄소년단 (BTS)", R.drawable.img_album_exp))
-            add(Album("Lilac", "아이유 (IU)", R.drawable.img_album_exp2))
-            add(Album("Next Level", "에스파 (AESPA)", R.drawable.img_album_exp3))
-            add(Album("Boy with Luv", "방탄소년단 (BTS)", R.drawable.img_album_exp4))
-            add(Album("BBoom BBoom", "모모랜드 (MOMOLAND)", R.drawable.img_album_exp5))
-            add(Album("Weekend", "태연 (Tae Yeon)", R.drawable.img_album_exp6))
-        }
+        songDB = SongDatabase.getInstance(requireContext())!!
+        albumDatas.addAll(songDB.albumDao().getAlbums()) // songDB에서 album list를 가져옵니다.
+        Log.d("albumlist", albumDatas.toString())
 
+//        albumDatas.apply {
+//            add(Album("Butter", "방탄소년단 (BTS)", R.drawable.img_album_exp))
+//            add(Album("Lilac", "아이유 (IU)", R.drawable.img_album_exp2))
+//            add(Album("Next Level", "에스파 (AESPA)", R.drawable.img_album_exp3))
+//            add(Album("Boy with Luv", "방탄소년단 (BTS)", R.drawable.img_album_exp4))
+//            add(Album("BBoom BBoom", "모모랜드 (MOMOLAND)", R.drawable.img_album_exp5))
+//            add(Album("Weekend", "태연 (Tae Yeon)", R.drawable.img_album_exp6))
+//        }
+
+        // 더미데이터랑 Adapter 연결
         val albumRVAdapter = AlbumRVAdapter(albumDatas)
+        // 리사이클러뷰에 어댑터를 연결
         binding.homeTodayMusicAlbumRv.adapter = albumRVAdapter
-        binding.homeTodayMusicAlbumRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        // 레이아웃 매니저 설정
+        binding.homeTodayMusicAlbumRv.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
 
         albumRVAdapter.setMyItemClickListener(object : AlbumRVAdapter.MyItemClickListener {
             override fun onItemClick(album: Album) {
@@ -70,6 +80,62 @@ class HomeFragment : Fragment() {
         binding.indicator.setViewPager(binding.homePannelVp)
 
         return binding.root
+    }
+
+    private fun inputDummyAlbums(){
+        val songDB = SongDatabase.getInstance(requireActivity())!!
+        val songs = songDB.albumDao().getAlbums()
+
+        if (songs.isNotEmpty()) return
+
+        songDB.albumDao().insert(
+            Album(
+                1,
+                "IU 5th Album 'LILAC'",
+                "아이유 (IU)",
+                R.drawable.img_album_exp2
+            )
+        )
+
+        songDB.albumDao().insert(
+            Album(
+                2,
+                "Butter",
+                "방탄소년단 (BTS)",
+                R.drawable.img_album_exp
+            )
+        )
+
+        songDB.albumDao().insert(
+            Album(
+                3,
+                "iScreaM Vol.10: Next Level Remixes",
+                "에스파 (AESPA)",
+                R.drawable.img_album_exp3
+            )
+        )
+
+        songDB.albumDao().insert(
+            Album(
+                4,
+                "Map of the Soul Persona",
+                "방탄소년단 (BTS)",
+                R.drawable.img_album_exp4,
+            )
+        )
+
+
+        songDB.albumDao().insert(
+            Album(
+                5,
+                "Great!",
+                "모모랜드 (MOMOLAND)",
+                R.drawable.img_album_exp5
+            )
+        )
+
+        val songDBData = songDB.albumDao().getAlbums()
+        Log.d("DB data", songDBData.toString())
     }
 
     private fun changeAlbumFragment(album: Album) {

@@ -12,6 +12,11 @@ android {
     viewBinding{
         enable = true
     }
+
+    dataBinding {
+        enable = true
+    }
+    
     defaultConfig {
         applicationId = "com.example.flo_clone"
         minSdk = 24
@@ -47,6 +52,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.firebase.perf.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -56,7 +62,7 @@ dependencies {
     implementation("com.google.code.gson:gson:2.8.7")
 
     // Room DB
-    val room_version = "2.6.1"
+    val room_version = "2.5.2"
     implementation("androidx.room:room-runtime:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
 //    annotationProcessor("androidx.room:room-compiler:$room_version")
