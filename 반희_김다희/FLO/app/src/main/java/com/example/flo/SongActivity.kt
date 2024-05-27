@@ -22,8 +22,8 @@ import java.util.Timer
 class SongActivity : AppCompatActivity() {
 
     lateinit var binding: ActivitySongBinding
-    lateinit var song : Song
-    lateinit var timer : Timer
+    lateinit var song: Song
+    lateinit var timer: Timer
     private var mediaPlayer: MediaPlayer? = null
     private var gson: Gson = Gson()
 
@@ -89,10 +89,10 @@ class SongActivity : AppCompatActivity() {
         }
     }
 
-    private fun initSong(){
-        if(intent.hasExtra("title") && intent.hasExtra("singer")){
+    private fun initSong() {
+        if (intent.hasExtra("title") && intent.hasExtra("singer")) {
             song = Song(
-                intent.getIntExtra("coverImg",0),
+                intent.getIntExtra("coverImg", 0),
                 intent.getStringExtra("title")!!,
                 intent.getStringExtra("singer")!!,
                 intent.getIntExtra("second", 0),
@@ -104,7 +104,7 @@ class SongActivity : AppCompatActivity() {
         startTimer()
     }
 
-    private fun setPlayer(song: Song){
+    private fun setPlayer(song: Song) {
         binding.songMusicTitleTv.text = intent.getStringExtra("title")!!
         binding.songSingerNameTv.text = intent.getStringExtra("singer")!!
         binding.songProgressSb.progress = (song.second * 1000 / song.playTime)
@@ -115,7 +115,8 @@ class SongActivity : AppCompatActivity() {
         val timeformat = SimpleDateFormat("mm:ss")
 //        binding.songStartTimeTv.text = timeformat.format(mediaPlayer?.currentPosition)
         binding.songEndTimeTv.text = timeformat.format(mediaPlayer?.duration)
-        binding.songStartTimeTv.text =  String.format("%02d:%02d", song.second / 60, song.second %60)
+        binding.songStartTimeTv.text =
+            String.format("%02d:%02d", song.second / 60, song.second % 60)
         setPlayerStatus(song.isplaying)
 
         CoroutineScope(Dispatchers.Main).launch {
@@ -124,40 +125,41 @@ class SongActivity : AppCompatActivity() {
         }
     }
 
-    private fun startTimer(){
+    private fun startTimer() {
         timer = Timer(song.playTime, song.isplaying)
         timer.start()
     }
-    inner class Timer(private val playTime: Int, var isPlaying: Boolean = true):Thread(){
-        private var second : Int = 0
-        private var mills : Float = 0f
+
+    inner class Timer(private val playTime: Int, var isPlaying: Boolean = true) : Thread() {
+        private var second: Int = 0
+        private var mills: Float = 0f
 
         override fun run() {
             super.run()
             try {
-                while (true){
-                    if (second >= playTime){
+                while (true) {
+                    if (second >= playTime) {
                         break
                     }
-                    if (isPlaying){
+                    if (isPlaying) {
                         sleep(50)
                         mills += 50
 
                         runOnUiThread {
-                            binding.songProgressSb.progress = ((mills / playTime)*100).toInt()
+                            binding.songProgressSb.progress = ((mills / playTime) * 100).toInt()
                         }
                         if (mills % 1000 == 0f) {
                             runOnUiThread {
                                 binding.songStartTimeTv.text =
                                     String.format("%02d:%02d", second / 60, second % 60)
                             }
-                            second ++
+                            second++
                         }
 
                     }
                 }
-            }catch (e:InterruptedException){
-                Log.d("Song","쓰레드가 죽었습니다. ${e.message}")
+            } catch (e: InterruptedException) {
+                Log.d("Song", "쓰레드가 죽었습니다. ${e.message}")
             }
         }
     }
@@ -173,6 +175,34 @@ class SongActivity : AppCompatActivity() {
 
         editor.apply()
     }
+
+    //    override fun onStart() {
+//        super.onStart()
+//        setPlayerStatus(true)
+//        song.second = ((binding.songProgressSb.progress * song.playTime) /100) / 1000
+//        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
+//        val songDataGson = sharedPreferences.getString("songData", "")
+//        binding.songStartTimeTv.text = song.
+//    }
+//    override fun onStart() {
+//        super.onStart()
+//
+//        // SharedPreferences에서 저장된 JSON 문자열을 가져옴
+//        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
+//        val songJson = sharedPreferences.getString("songData", null)
+//
+//        if (songJson != null) {
+//            // JSON 문자열을 Song 객체로 역직렬화
+//            song = gson.fromJson(songJson, Song::class.java)
+//
+//            // song 객체를 이용하여 UI 또는 필요한 작업을 수행
+//            binding.songProgressSb.progress = ((song.second * 1000 * 100) / song.playTime).toInt()
+//            // 기타 필요한 초기화 작업
+//
+//            binding.songStartTimeTv.text = songJson.
+//        }
+//    }
+
 
     override fun onDestroy() {
         super.onDestroy()

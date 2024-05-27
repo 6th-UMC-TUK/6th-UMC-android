@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="fragment_title_tv" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_marginStart">20dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="fragment_look_chip" parent="ShapeAppearanceOverlay.Material3.Chip">
+        <item name="android:textColor">@drawable/fragment_look_chip_textcolor_selector</item>
+        <item name="android:checkable">true</item>
+        <item name="chipBackgroundColor">@drawable/fragment_look_chip_bg_selector</item>
+    </style>
+
+    <style name="round_textview" parent="Widget.AppCompat.TextView">
+        <item name="background">@drawable/textview_background_radius</item>
+    </style>
+
+    <style name="locker_tab_text" parent="TextAppearance.Design.Tab">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="TransparentBottomSheetDialogTheme" parent="Theme.AppCompat.Light">
+        <item name="background">@color/transparent</item>
+        <item name="android:colorBackground">@color/transparent</item>
+    </style>
+</resources>
