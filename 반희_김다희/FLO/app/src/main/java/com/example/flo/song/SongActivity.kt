@@ -18,6 +18,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
+import java.util.Timer
 
 
 class SongActivity : AppCompatActivity() {
@@ -232,36 +233,37 @@ class SongActivity : AppCompatActivity() {
         timer = Timer(songs[nowPos].playTime, songs[nowPos].isplaying)
         timer.start()
     }
-    inner class Timer(private val playTime: Int, var isPlaying: Boolean = true):Thread(){
-        private var second : Int = 0
-        private var mills : Float = 0f
+
+    inner class Timer(private val playTime: Int, var isPlaying: Boolean = true) : Thread() {
+        private var second: Int = 0
+        private var mills: Float = 0f
 
         override fun run() {
             super.run()
             try {
-                while (true){
-                    if (second >= playTime){
+                while (true) {
+                    if (second >= playTime) {
                         break
                     }
-                    if (isPlaying){
+                    if (isPlaying) {
                         sleep(50)
                         mills += 50
 
                         runOnUiThread {
-                            binding.songProgressSb.progress = ((mills / playTime)*100).toInt()
+                            binding.songProgressSb.progress = ((mills / playTime) * 100).toInt()
                         }
                         if (mills % 1000 == 0f) {
                             runOnUiThread {
                                 binding.songStartTimeTv.text =
                                     String.format("%02d:%02d", second / 60, second % 60)
                             }
-                            second ++
+                            second++
                         }
 
                     }
                 }
-            }catch (e:InterruptedException){
-                Log.d("Song","쓰레드가 죽었습니다. ${e.message}")
+            } catch (e: InterruptedException) {
+                Log.d("Song", "쓰레드가 죽었습니다. ${e.message}")
             }
         }
     }
@@ -279,6 +281,34 @@ class SongActivity : AppCompatActivity() {
 
         editor.apply()
     }
+
+    //    override fun onStart() {
+//        super.onStart()
+//        setPlayerStatus(true)
+//        song.second = ((binding.songProgressSb.progress * song.playTime) /100) / 1000
+//        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
+//        val songDataGson = sharedPreferences.getString("songData", "")
+//        binding.songStartTimeTv.text = song.
+//    }
+//    override fun onStart() {
+//        super.onStart()
+//
+//        // SharedPreferences에서 저장된 JSON 문자열을 가져옴
+//        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
+//        val songJson = sharedPreferences.getString("songData", null)
+//
+//        if (songJson != null) {
+//            // JSON 문자열을 Song 객체로 역직렬화
+//            song = gson.fromJson(songJson, Song::class.java)
+//
+//            // song 객체를 이용하여 UI 또는 필요한 작업을 수행
+//            binding.songProgressSb.progress = ((song.second * 1000 * 100) / song.playTime).toInt()
+//            // 기타 필요한 초기화 작업
+//
+//            binding.songStartTimeTv.text = songJson.
+//        }
+//    }
+
 
     override fun onDestroy() {
         super.onDestroy()

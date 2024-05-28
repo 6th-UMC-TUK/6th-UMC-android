@@ -1,16 +1,18 @@
 package com.example.flo_clone.Locker
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flo_clone.Song.Song
 import com.example.flo_clone.databinding.ItemSongBinding
 
-class SavedSongRVAdapter(private val songList: ArrayList<Song>):
-RecyclerView.Adapter<SavedSongRVAdapter.ViewHolder>() {
+class SavedSongRVAdapter() :
+    RecyclerView.Adapter<SavedSongRVAdapter.ViewHolder>() {
+    private val songs = ArrayList<Song>()
 
     interface DeleteItemClickListener {
-        fun onRemoveItem(position: Int)
+        fun onRemoveItem(songId: Int)
     }
 
     private lateinit var delItemClickListener: DeleteItemClickListener
@@ -27,24 +29,38 @@ RecyclerView.Adapter<SavedSongRVAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: SavedSongRVAdapter.ViewHolder, position: Int) {
-        holder.bind(songList[position])
-        holder.binding.itemSongMoreIv.setOnClickListener { delItemClickListener.onRemoveItem(position) }
+        holder.bind(songs[position])
+        holder.binding.itemSongMoreIv.setOnClickListener {
+            delItemClickListener.onRemoveItem(songs[position].id)
+            removeItem(position)
+        }
     }
 
-    override fun getItemCount(): Int = songList.size
+    override fun getItemCount(): Int = songs.size
+
+
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun addSongs(songs: ArrayList<Song>) {
+        this.songs.clear()
+        this.songs.addAll(songs)
+
+        notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun removeItem(position: Int){
+        songs.removeAt(position)
+        notifyDataSetChanged()
+    }
 
     inner class ViewHolder(val binding: ItemSongBinding):
-            RecyclerView.ViewHolder(binding.root) {
+        RecyclerView.ViewHolder(binding.root) {
 
-                fun bind(song: Song) {
-                    binding.itemSongTitleTv.text = song.title
-                    binding.itemSongSingerTv.text = song.singer
-                    binding.itemSongImgIv.setImageResource(song.coverImg!!)
-                }
-            }
-
-    fun removeItem(position: Int) {
-        songList.removeAt(position)
-        notifyDataSetChanged()
+        fun bind(song: Song) {
+            binding.itemSongTitleTv.text = song.title
+            binding.itemSongSingerTv.text = song.singer
+            binding.itemSongImgIv.setImageResource(song.coverImg!!)
+        }
     }
 }
