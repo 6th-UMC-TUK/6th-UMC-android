@@ -16,7 +16,7 @@ android {
     dataBinding {
         enable = true
     }
-    
+
     defaultConfig {
         applicationId = "com.example.flo_clone"
         minSdk = 24
