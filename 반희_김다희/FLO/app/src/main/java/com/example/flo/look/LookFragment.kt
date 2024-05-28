@@ -1,22 +1,22 @@
-package com.example.flo
+package com.example.flo.look
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.flo.databinding.FragmentDetailBinding
+import com.example.flo.databinding.FragmentLookBinding
 
-class DetailFragment : Fragment() {
+class LookFragment : Fragment() {
 
-    lateinit var binding: FragmentDetailBinding
+    lateinit var binding: FragmentLookBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentDetailBinding.inflate(inflater,container,false)
+        binding = FragmentLookBinding.inflate(inflater, container, false)
 
         return binding.root
     }

@@ -1,24 +1,23 @@
-package com.example.flo
+package com.example.flo.locker
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.flo.databinding.FragmentBannerBinding
+import com.example.flo.databinding.FragmentLockerMusicfileBinding
+import com.example.flo.databinding.FragmentVideoBinding
 
-class BannerFragment(val imgRes : Int) : Fragment() {
-
-    lateinit var  binding : FragmentBannerBinding
+class MusicFileFragment: Fragment() {
+    lateinit var binding: FragmentLockerMusicfileBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentBannerBinding.inflate(inflater, container ,false)
+        binding = FragmentLockerMusicfileBinding.inflate(inflater, container, false)
 
-        binding.bannerImageIv.setImageResource(imgRes)
         return binding.root
     }
 }

@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SongActivity"
+            android:name=".song.SongActivity"
             android:exported="true" />
     </application>
 
