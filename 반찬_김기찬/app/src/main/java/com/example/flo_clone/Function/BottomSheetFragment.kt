@@ -26,7 +26,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     ): View? {
         binding = FragmentBottomSheetBinding.inflate(inflater, container, false)
 
-        setStyle(STYLE_NORMAL, R.style.TransparentBottomSheetDialogTheme)
+//        setStyle(STYLE_NORMAL, R.style.TransparentBottomSheetDialogTheme)
         return binding.root
     }
 

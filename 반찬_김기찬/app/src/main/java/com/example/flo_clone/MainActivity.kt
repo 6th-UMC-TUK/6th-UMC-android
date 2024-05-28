@@ -4,6 +4,8 @@ import android.content.Intent
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.SeekBar
@@ -31,8 +33,15 @@ class MainActivity : AppCompatActivity() {
     var nowPos = 0
 
     private var mediaPlayer: MediaPlayer? = null
-
-
+    private val handler = Handler(Looper.getMainLooper())
+    private val updateSeekBarTask = object : Runnable {
+        override fun run() {
+            if (mediaPlayer != null && mediaPlayer!!.isPlaying) {
+                binding.mainSeekbarSb.progress = mediaPlayer!!.currentPosition
+                handler.postDelayed(this, 1000)
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,13 +109,36 @@ class MainActivity : AppCompatActivity() {
             binding.mainMiniplayBtn.visibility = View.GONE
             binding.mainPauseBtn.visibility = View.VISIBLE
             mediaPlayer?.start()
+
+            // 추가: 현재 노래의 재생 시간을 체크하는 스레드 시작
+            handler.post(updateSeekBarTask)
+            checkSongEnd() // 추가: 노래가 끝났는지 확인하고 다음 노래로 이동할 수 있도록 함
         } else {
             binding.mainMiniplayBtn.visibility = View.VISIBLE
             binding.mainPauseBtn.visibility = View.GONE
             if (mediaPlayer?.isPlaying == true) {
                 mediaPlayer?.pause()
             }
+            handler.removeCallbacks(updateSeekBarTask)
         }
+    }
+
+    // 다음 노래로 자동으로 넘어가게 함
+    private fun checkSongEnd() {
+        handler.postDelayed({
+            if (mediaPlayer != null && mediaPlayer!!.isPlaying) {
+                val currentProgress = mediaPlayer!!.currentPosition / 1000
+                val totalDuration = songs[nowPos].playTime
+
+                if (currentProgress >= totalDuration) {
+                    // 현재 노래가 종료되었으므로 다음 노래로 이동
+                    moveSong(1)
+                } else {
+                    // 다음 체크를 위해 재귀 호출
+                    checkSongEnd()
+                }
+            }
+        }, 1000) // 1초마다 체크
     }
     private fun moveSong(direct: Int) {
         if (nowPos + direct < 0) {
@@ -137,6 +169,7 @@ class MainActivity : AppCompatActivity() {
 
         nowPos = getPlayingSongPosition(songId)
         setMiniPlayer(songs[nowPos])
+        setPlayerStatus(true)
     }
 
     private fun getPlayingSongPosition(songId: Int): Int{
@@ -157,13 +190,6 @@ class MainActivity : AppCompatActivity() {
         binding.mainMiniplayerSingerTv.text = song.singer
         binding.mainSeekbarSb.max = song.playTime * 1000
 
-        while (mediaPlayer?.isPlaying == true) {
-            runOnUiThread {
-                binding.mainSeekbarSb.progress = mediaPlayer!!.currentPosition
-            }
-        }
-//        binding.mainSeekbarSb.progress = (songs[nowPos].second * 1000) / song.playTime
-
         val music = resources.getIdentifier(song.music, "raw", this.packageName)
         mediaPlayer = MediaPlayer.create(this, music)
         mediaPlayer?.seekTo(songs[nowPos].second * 1000)
@@ -171,38 +197,29 @@ class MainActivity : AppCompatActivity() {
         binding.mainSeekbarSb.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 if (fromUser) {
-                    val newSecond = progress / 1000
-                    mediaPlayer?.seekTo(newSecond * 1000)
-                    songs[nowPos].second = newSecond
+                    mediaPlayer?.seekTo(progress)
+                    songs[nowPos].second = progress / 1000
                 }
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                // 사용자가 터치하기 시작할 때 호출
                 mediaPlayer?.pause()
             }
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                if (songs[nowPos].isPlaying) {
-                    mediaPlayer?.start()
-                }
+                // 사용자가 터치를 끝냈을 때 호출
+                mediaPlayer?.start()
             }
         })
 
         setPlayerStatus(song.isPlaying)
-
-//        val music = resources.getIdentifier(song.music, "raw", this.packageName)
-//        mediaPlayer = MediaPlayer.create(this, music)
-
-
-//        val music = resources.getIdentifier(song.music, "raw", this.packageName)
-//        mediaPlayer = MediaPlayer.create(this, music)
-//        setPlayerStatus(song.isPlaying)
     }
 
     override fun onPause() {
         super.onPause()
         Log.d("pause", "pause 발생")
-        songs[nowPos].second = ((binding.mainSeekbarSb.progress * songs[nowPos].playTime) / 100) / 1000
+        songs[nowPos].second = binding.mainSeekbarSb.progress / 1000
         Log.d("mainpauseprogress", binding.mainSeekbarSb.progress.toString())
 
         val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
