@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.flo.databinding.ItemAlbumBinding
 import java.util.*
 
-class AlbumRVAdapter(private val albumList: ArrayList<Album>) : RecyclerView.Adapter<AlbumRVAdapter.ViewHolder>(){
+class AlbumRVAdapter(private val albumList: ArrayList<Album>,
+    val onClick : (album: Album) -> Unit
+) : RecyclerView.Adapter<AlbumRVAdapter.ViewHolder>(){
 
     // 클릭 인터페이스 정의
     interface MyItemClickListener{
@@ -53,7 +55,7 @@ class AlbumRVAdapter(private val albumList: ArrayList<Album>) : RecyclerView.Ada
         // 타이틀 누르면 삭제되는 클릭 이벤트
         // holder.binding.itemAlbumTitleTv.setOnClickListener { mItemClickListener.onRemoveAlbum(position) }
 
-        holder.itemView.setOnClickListener {
+        holder.binding.itemAlbumCoverImgCardView.setOnClickListener {
             mItemClickListener.onItemClick(albumList[position])
         }
 
@@ -61,7 +63,7 @@ class AlbumRVAdapter(private val albumList: ArrayList<Album>) : RecyclerView.Ada
         holder.binding.itemAlbumPlayImgIv.setOnClickListener {
             Log.d("AlbumRVAdapter", "Play button clicked for album: ${albumList[position].title}")
             // OK
-
+            onClick(albumList[position])
             mItemClickListener.onItemClick(albumList[position])
         }
     }

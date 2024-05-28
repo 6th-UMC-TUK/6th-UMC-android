@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     private var gson: Gson = Gson()
     private var mediaPlayer: MediaPlayer? = null
 
-    val songs = arrayListOf<Song>()
+    var songs = listOf<Song>()
     lateinit var songDB: SongDatabase
     var nowPos = 0
 
@@ -44,7 +44,6 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        inputDummySongs()
         initClickListener()
         initBottomNavigation()
         updateMiniPlayerCl(album = Album())
@@ -53,6 +52,8 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
+        inputDummySongs()
+
         // ID 받아옴
         val spf = getSharedPreferences("song", MODE_PRIVATE)
 
@@ -60,14 +61,19 @@ class MainActivity : AppCompatActivity() {
 
         val songDB = SongDatabase.getInstance(this)!!
 
-        songs[nowPos] = if (songId == 0) {
-            songDB.songDao().getSong(1)
-        } else {
-            songDB.songDao().getSong(songId)
-        }
+        if (songs.isNotEmpty()){
+//            songs[nowPos] = if (songId == 0) {
+//                songDB.songDao().getSong(1)
+//            } else {
+//                songDB.songDao().getSong(songId)
+//            }
 
-        Log.d("song ID", songs[nowPos].id.toString())
-        setMiniPlayer(songs[nowPos])
+
+            Log.d("song ID", songs[nowPos].id.toString())
+
+
+            setMiniPlayer(songs[nowPos])
+        }
     }
 
     private fun initClickListener() {
@@ -185,7 +191,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun inputDummySongs() {
         val songDB = SongDatabase.getInstance(this)!!
-        val songs = songDB.songDao().getSongs()
+        songs = songDB.songDao().getSongs()
 
         // 데이터 존재 시 함수 종료
         if (songs.isNotEmpty()) return
@@ -248,8 +254,8 @@ class MainActivity : AppCompatActivity() {
         )
 
         // 데이터가 DB에 잘 들어갔는지 확인
-        val _songs = songDB.songDao().getSongs()
-        Log.d("DB data", _songs.toString())
+        songs = songDB.songDao().getSongs()
+        //Log.d("DB data", _songs.toString())
 
     }
 }

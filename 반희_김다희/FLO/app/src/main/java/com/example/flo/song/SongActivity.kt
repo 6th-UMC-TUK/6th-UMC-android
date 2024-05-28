@@ -45,7 +45,7 @@ class SongActivity : AppCompatActivity() {
 
     private fun initClickListener() {
         binding.songDownIb.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
 
         binding.songMiniplayerIv.setOnClickListener {

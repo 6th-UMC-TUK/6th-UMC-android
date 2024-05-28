@@ -39,7 +39,11 @@ class HomeFragment : Fragment(), AlbumRVAdapter.CommunicationInterface {
 
 
         // 더미데이터 - Adapter 연결
-        val albumRVAdapter = AlbumRVAdapter(albumDatas)
+        val albumRVAdapter = AlbumRVAdapter(albumDatas, { album ->
+            (activity as? MainActivity)?.let {
+                it.updateMiniPlayerCl(album)
+            }
+        })
 
         // 리사이클러뷰 - Adapter 연결
         binding.homeTodayMusicAlbumRv.adapter = albumRVAdapter
