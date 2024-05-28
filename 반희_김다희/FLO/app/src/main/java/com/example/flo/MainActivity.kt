@@ -5,6 +5,7 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.flo.album.Album
 import com.example.flo.databinding.ActivityMainBinding
@@ -19,9 +20,13 @@ import com.google.gson.Gson
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
-    private var song: Song = Song()
     private var gson: Gson = Gson()
     private var mediaPlayer: MediaPlayer? = null
+
+    val songs = arrayListOf<Song>()
+    lateinit var songDB: SongDatabase
+    var nowPos = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.mainPlayerCl.setOnClickListener {
             val editor = getSharedPreferences("song", MODE_PRIVATE).edit()
-            editor.putInt("songId", song.id)
+            editor.putInt("songId", songs[nowPos].id)
             editor.apply()
 
             val intent = Intent(this, SongActivity::class.java)
@@ -47,33 +52,22 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        /*
-        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
-        val songJson = sharedPreferences.getString("songData", null)
-
-        song = if (songJson == null) {
-            Song(0, "라일락", "아이유 (IU)", 0, 214, false, "music_lilac")
-        } else {
-            gson.fromJson(songJson, Song::class.java)
-        }
-        */
 
         // ID 받아옴
         val spf = getSharedPreferences("song", MODE_PRIVATE)
-        // songId는 SongActivity에서 onPause가 호출되었을 때 재생 중이던 노래의 id(pk)
+
         val songId = spf.getInt("songId", 0)
 
-        // SongDatabase의 인스턴스를 가져옴
         val songDB = SongDatabase.getInstance(this)!!
 
-        song = if (songId == 0) { // 재생 중이던 노래가 없었으면
+        songs[nowPos] = if (songId == 0) {
             songDB.songDao().getSong(1)
-        } else { // 재생 중이던 노래가 있었으면
+        } else {
             songDB.songDao().getSong(songId)
         }
 
-        Log.d("song ID", song.id.toString())
-        setMiniPlayer(song)
+        Log.d("song ID", songs[nowPos].id.toString())
+        setMiniPlayer(songs[nowPos])
     }
 
     private fun initClickListener() {
@@ -83,8 +77,33 @@ class MainActivity : AppCompatActivity() {
         binding.mainPauseBtn.setOnClickListener {
             setPlayerStatus(false)
         }
+        binding.mainMiniplayerPrevBtn.setOnClickListener {
+            moveSong(-1)
+        }
+        binding.mainMiniplayerNextBtn.setOnClickListener {
+            moveSong(+1)
+        }
     }
 
+    private fun moveSong(direct: Int) {
+        if (nowPos + direct < 0) {
+            Toast.makeText(this, "first song", Toast.LENGTH_SHORT).show()
+            return
+        }
+        if (nowPos + direct >= songs.size) {
+            Toast.makeText(this, "last song", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        nowPos += direct
+
+//        startTimer()
+        mediaPlayer?.release()
+        mediaPlayer = null
+
+        setMiniPlayer(songs[nowPos])
+        setPlayerStatus(true)
+    }
     private fun setPlayerStatus(isPlaying : Boolean){
 
         if(isPlaying) {
