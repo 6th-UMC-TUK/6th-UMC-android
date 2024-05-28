@@ -14,37 +14,34 @@ import com.example.flo.album.Album
 import com.example.flo.album.AlbumFragment
 import com.example.flo.album.AlbumRVAdapter
 import com.example.flo.databinding.FragmentHomeBinding
+import com.example.flo.song.SongDatabase
 import com.google.gson.Gson
 
 class HomeFragment : Fragment(), AlbumRVAdapter.CommunicationInterface {
 
     lateinit var binding: FragmentHomeBinding
     private var albumDatas = ArrayList<Album>()
+    private lateinit var songDB: SongDatabase
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
 
-        /*
-        //데이터 리스트 생성 더미 데이터
-        albumDatas.apply {
-            add(Album("Butter", "방탄소년단 (BTS)", R.drawable.img_album_exp))
-            add(Album("Lilac", "아이유 (IU)", R.drawable.img_album_exp2))
-            add(Album("Next Level", "에스파 (AESPA)", R.drawable.img_album_exp3))
-            add(Album("Boy with Luv", "방탄소년단 (BTS)", R.drawable.img_album_exp4))
-            add(Album("BBoom BBoom", "모모랜드 (MOMOLAND)", R.drawable.img_album_exp5))
-            add(Album("Weekend","태연 (Tae Yeon)", R.drawable.img_album_exp6))
-        }
-         */
+        inputDummyAlbums()
 
-        // 더미데이터랑 Adapter 연결
+        songDB = SongDatabase.getInstance(requireContext())!!
+        albumDatas.addAll(songDB.albumDao().getAlbums())
+        Log.d("albumlist", albumDatas.toString())
+
+
+        // 더미데이터 - Adapter 연결
         val albumRVAdapter = AlbumRVAdapter(albumDatas)
 
-        // 리사이클러뷰에 Adapter 연결
+        // 리사이클러뷰 - Adapter 연결
         binding.homeTodayMusicAlbumRv.adapter = albumRVAdapter
 
         // 레이아웃 매니저 설정
@@ -73,6 +70,57 @@ class HomeFragment : Fragment(), AlbumRVAdapter.CommunicationInterface {
         return binding.root
     }
 
+    private fun inputDummyAlbums(){
+        val songDB = SongDatabase.getInstance(requireActivity())!!
+        val songs = songDB.albumDao().getAlbums()
+
+        if (songs.isNotEmpty()) return
+
+        songDB.albumDao().insert(
+            Album(
+                1,
+                "Butter",
+                "방탄소년단 (BTS)",
+                R.drawable.img_album_exp
+            )
+        )
+        songDB.albumDao().insert(
+            Album(
+                2,
+                "IU 5th Album 'LILAC'",
+                "아이유 (IU)",
+                R.drawable.img_album_exp2
+            )
+        )
+        songDB.albumDao().insert(
+            Album(
+                3,
+                "iScreaM Vol.10: Next Level Remixes",
+                "에스파 (AESPA)",
+                R.drawable.img_album_exp3
+            )
+        )
+        songDB.albumDao().insert(
+            Album(
+                4,
+                "Map of the Soul Persona",
+                "방탄소년단 (BTS)",
+                R.drawable.img_album_exp4,
+            )
+        )
+        songDB.albumDao().insert(
+            Album(
+                5,
+                "Great!",
+                "모모랜드 (MOMOLAND)",
+                R.drawable.img_album_exp5
+            )
+        )
+
+        val songDBData = songDB.albumDao().getAlbums()
+        Log.d("DB data", songDBData.toString())
+    }
+
     private fun changeAlbumFragment(album: Album) {
         (context as MainActivity).supportFragmentManager.beginTransaction()
             .replace(R.id.main_frm, AlbumFragment().apply {
@@ -85,6 +133,7 @@ class HomeFragment : Fragment(), AlbumRVAdapter.CommunicationInterface {
             .commitAllowingStateLoss()
     }
 
+    
     override fun sendData(album: Album) {
 
         Log.d("HomeFragment", "sendData called with album: ${album.title}")

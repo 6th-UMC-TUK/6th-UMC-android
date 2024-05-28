@@ -1,4 +1,4 @@
-package com.example.flo
+package com.example.flo.album
 
 import androidx.room.Dao
 import androidx.room.Delete
