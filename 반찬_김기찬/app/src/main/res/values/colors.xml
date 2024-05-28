@@ -18,4 +18,5 @@
     <color name="select_color">#3f3fff</color>
     <color name="gray_color">#a8a8a8</color>
     <color name="song_player_bg">#a8a8a8</color>
+    <color name="default_color">#757575</color>
 </resources>

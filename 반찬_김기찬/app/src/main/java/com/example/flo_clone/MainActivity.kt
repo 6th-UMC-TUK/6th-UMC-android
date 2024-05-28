@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     private var mediaPlayer: MediaPlayer? = null
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_Flo_clone)
@@ -73,11 +74,10 @@ class MainActivity : AppCompatActivity() {
             songDB.songDao().getSong(songId)
         }
 
-        val songSecond =
-
         Log.d("song ID", songs[nowPos].id.toString())
         setMiniPlayer(songs[nowPos]) // song의 정보로 MiniPlayer를 setting
     }
+
     private fun initClickListener() {
         binding.mainMiniplayBtn.setOnClickListener {
             setPlayerStatus(true)
@@ -213,11 +213,6 @@ class MainActivity : AppCompatActivity() {
         editor.apply()
     }
 
-    private fun startTimer() {
-        val songActivity = SongActivity()
-        songActivity.startTimer()
-    }
-
 
     private fun inputDummySongs() {
         val songDB = SongDatabase.getInstance(this)!!
@@ -319,6 +314,13 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    fun hideMiniPlayer() { // MiniPlayer 숨기기
+        binding.mainPlayerCl.visibility = View.GONE
+    }
+
+    fun showMiniPlayer() { // MiniPlayer 보이기
+        binding.mainPlayerCl.visibility = View.VISIBLE
+    }
     private fun initBottomNavigation(){
 
         supportFragmentManager.beginTransaction()
@@ -356,7 +358,5 @@ class MainActivity : AppCompatActivity() {
             }
             false
         }
-
-
     }
 }

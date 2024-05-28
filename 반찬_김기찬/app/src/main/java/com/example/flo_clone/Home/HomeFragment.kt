@@ -15,6 +15,7 @@ import com.example.flo_clone.Album.AlbumFragment
 import com.example.flo_clone.Album.AlbumRVAdapter
 import com.example.flo_clone.MainActivity
 import com.example.flo_clone.R
+import com.example.flo_clone.Song.Song
 import com.example.flo_clone.Song.SongDatabase
 import com.example.flo_clone.databinding.FragmentHomeBinding
 import com.google.gson.Gson
@@ -102,6 +103,9 @@ class HomeFragment : Fragment() {
                 2,
                 "Butter",
                 "방탄소년단 (BTS)",
+//                listOf(  // 앨범의 수록곡 추가할 때 사용
+//                    Song()
+//                ),
                 R.drawable.img_album_exp
             )
         )

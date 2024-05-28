@@ -42,51 +42,66 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/locker_locker_tv"/>
 
-    <ImageView
-        android:id="@+id/locker_select_all_iv"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:src="@drawable/btn_playlist_select_off"
+    <LinearLayout
+        android:id="@+id/locker_select_all_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="@id/locker_seg_tb"
-        app:layout_constraintTop_toBottomOf="@id/locker_seg_tb"/>
+        app:layout_constraintTop_toBottomOf="@id/locker_seg_tb">
 
-    <TextView
-        android:id="@+id/locker_select_all_tv"
+        <ImageView
+            android:id="@+id/locker_select_all_iv"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/btn_playlist_select_off"
+            android:layout_gravity="center_horizontal"/>
+
+        <TextView
+            android:id="@+id/locker_select_all_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="전체선택"
+            app:layout_constraintStart_toEndOf="@+id/locker_select_all_iv"
+            app:layout_constraintTop_toTopOf="@id/locker_select_all_iv"
+            app:layout_constraintBottom_toBottomOf="@id/locker_select_all_iv"/>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="전체선택"
-        app:layout_constraintStart_toEndOf="@+id/locker_select_all_iv"
-        app:layout_constraintTop_toTopOf="@id/locker_select_all_iv"
-        app:layout_constraintBottom_toBottomOf="@id/locker_select_all_iv"/>
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginStart="25dp"
+        app:layout_constraintStart_toEndOf="@id/locker_select_all_ll"
+        app:layout_constraintTop_toTopOf="@id/locker_select_all_ll"
+        app:layout_constraintBottom_toBottomOf="@id/locker_select_all_ll">
 
-    <ImageView
-        android:id="@+id/locker_play_all_iv"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:src="@drawable/icon_browse_arrow_right"
-        android:layout_marginStart="20dp"
-        app:layout_constraintStart_toEndOf="@id/locker_select_all_tv"
-        app:layout_constraintTop_toTopOf="@id/locker_select_all_tv"
-        app:layout_constraintBottom_toBottomOf="@id/locker_select_all_tv"/>
+        <ImageView
+            android:id="@+id/locker_play_all_iv"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/icon_browse_arrow_right"/>
 
-    <TextView
-        android:id="@+id/locker_play_all_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="전체듣기"
-        app:layout_constraintTop_toTopOf="@id/locker_play_all_iv"
-        app:layout_constraintBottom_toBottomOf="@id/locker_play_all_iv"
-        app:layout_constraintStart_toEndOf="@id/locker_play_all_iv"/>
+        <TextView
+            android:id="@+id/locker_play_all_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="전체듣기"/>
+
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="편집"
         android:layout_marginEnd="20dp"
-        app:layout_constraintTop_toTopOf="@id/locker_select_all_iv"
-        app:layout_constraintBottom_toBottomOf="@id/locker_select_all_iv"
+        app:layout_constraintTop_toTopOf="@id/locker_select_all_ll"
+        app:layout_constraintBottom_toBottomOf="@id/locker_select_all_ll"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.viewpager2.widget.ViewPager2
@@ -96,7 +111,7 @@
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/locker_select_all_iv"
+        app:layout_constraintTop_toBottomOf="@id/locker_select_all_ll"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
