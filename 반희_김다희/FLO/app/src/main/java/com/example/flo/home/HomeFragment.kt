@@ -87,7 +87,7 @@ class HomeFragment : Fragment(), AlbumRVAdapter.CommunicationInterface {
         songDB.albumDao().insert(
             Album(
                 2,
-                "IU 5th Album 'LILAC'",
+                "LILAC",
                 "아이유 (IU)",
                 R.drawable.img_album_exp2
             )
@@ -95,7 +95,7 @@ class HomeFragment : Fragment(), AlbumRVAdapter.CommunicationInterface {
         songDB.albumDao().insert(
             Album(
                 3,
-                "iScreaM Vol.10: Next Level Remixes",
+                "Next Level",
                 "에스파 (AESPA)",
                 R.drawable.img_album_exp3
             )
@@ -103,7 +103,7 @@ class HomeFragment : Fragment(), AlbumRVAdapter.CommunicationInterface {
         songDB.albumDao().insert(
             Album(
                 4,
-                "Map of the Soul Persona",
+                "Boy with Luv",
                 "방탄소년단 (BTS)",
                 R.drawable.img_album_exp4,
             )
@@ -111,7 +111,7 @@ class HomeFragment : Fragment(), AlbumRVAdapter.CommunicationInterface {
         songDB.albumDao().insert(
             Album(
                 5,
-                "Great!",
+                "BBOOM BBOOM",
                 "모모랜드 (MOMOLAND)",
                 R.drawable.img_album_exp5
             )
