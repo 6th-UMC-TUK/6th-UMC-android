@@ -45,7 +45,6 @@ class AlbumFragment:Fragment() {
         binding.albumSongTitle.text = album.title.toString()
         binding.albumSingerNameTv.text = album.singer.toString()
 
-
     }
 
     private fun initViewPager() {

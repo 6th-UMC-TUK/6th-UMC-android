@@ -132,7 +132,7 @@ class MainActivity : AppCompatActivity() {
 
                 if (currentProgress >= totalDuration) {
                     // 현재 노래가 종료되었으므로 다음 노래로 이동
-                    moveSong(1)
+                    moveSong(+1)
                 } else {
                     // 다음 체크를 위해 재귀 호출
                     checkSongEnd()
@@ -155,6 +155,7 @@ class MainActivity : AppCompatActivity() {
 //        startTimer()
         mediaPlayer?.release()
         mediaPlayer = null
+        songs[nowPos].second = 0
 
         setMiniPlayer(songs[nowPos])
         setPlayerStatus(true)
@@ -210,6 +211,7 @@ class MainActivity : AppCompatActivity() {
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
                 // 사용자가 터치를 끝냈을 때 호출
                 mediaPlayer?.start()
+                checkSongEnd()
             }
         })
 
@@ -228,6 +230,14 @@ class MainActivity : AppCompatActivity() {
         Log.d("mainpause", songs[nowPos].second.toString())
 
         editor.apply()
+    }
+
+
+    // 사용자가 포커스를 잃으면 미디어 플레이어 해제
+    override fun onStop() {
+        super.onStop()
+        mediaPlayer?.release() // 미디어 플레이어가 갖고 있던 리소스 해제
+        mediaPlayer = null // 미디어 플레이어 해제
     }
 
 
