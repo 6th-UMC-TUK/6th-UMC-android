@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.flo.R
 import com.example.flo.databinding.FragmentLockerSavedsongBinding
 import com.example.flo.song.Song
 import com.example.flo.song.SongDatabase
@@ -22,6 +21,7 @@ class SavedSongFragment : Fragment() {
     ): View? {
         binding = FragmentLockerSavedsongBinding.inflate(inflater, container, false)
 
+        // songDB 초기화
         songDB = SongDatabase.getInstance(requireContext())!!
 
         return binding.root

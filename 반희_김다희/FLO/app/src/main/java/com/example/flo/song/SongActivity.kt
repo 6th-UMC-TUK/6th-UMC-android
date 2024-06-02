@@ -1,6 +1,5 @@
 package com.example.flo.song
 
-import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +8,6 @@ import android.widget.SeekBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.example.flo.MainActivity
 import com.example.flo.R
 import com.example.flo.databinding.ActivitySongBinding
 import com.google.gson.Gson

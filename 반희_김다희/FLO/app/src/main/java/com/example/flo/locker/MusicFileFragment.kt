@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.flo.databinding.FragmentLockerMusicfileBinding
-import com.example.flo.databinding.FragmentVideoBinding
 
 class MusicFileFragment: Fragment() {
     lateinit var binding: FragmentLockerMusicfileBinding

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flo.databinding.ItemAlbumBinding
-import java.util.*
 
 class AlbumRVAdapter(private val albumList: ArrayList<Album>,
     val onClick : (album: Album) -> Unit
