@@ -6,11 +6,15 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.flo_clone.Album.Album
 import com.example.flo_clone.Album.AlbumDao
+import com.example.flo_clone.Album.Like
+import com.example.flo_clone.Login.User
+import com.example.flo_clone.Login.UserDao
 
-@Database(entities = [Song::class, Album::class], version = 1)
+@Database(entities = [Song::class, Album::class, User::class, Like::class], version = 1)
 abstract class SongDatabase: RoomDatabase() {
     abstract fun songDao(): SongDao
     abstract fun albumDao(): AlbumDao
+    abstract fun userDao(): UserDao
 
 
     companion object {
