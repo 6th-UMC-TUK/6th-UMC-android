@@ -1,12 +1,16 @@
 package com.example.flo_clone.Locker
 
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.flo_clone.Function.BottomSheetFragment
+import com.example.flo_clone.Login.LoginActivity
 import com.example.flo_clone.MainActivity
 import com.example.flo_clone.R
 import com.example.flo_clone.databinding.FragmentLockerBinding
@@ -14,7 +18,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class LockerFragment : Fragment() {
     lateinit var binding: FragmentLockerBinding
-    private val tabList = arrayListOf("저장한 곡", "음악파일")
+    private val tabList = arrayListOf("저장한 곡", "음악파일", "저장앨범")
     private var isSelected = false
     private var bottomSheetFragment: BottomSheetFragment? = null
 
@@ -25,6 +29,7 @@ class LockerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLockerBinding.inflate(inflater, container, false)
+
 
         initViewPager()
 
@@ -42,11 +47,50 @@ class LockerFragment : Fragment() {
 //                changeSelectAllText()
 //            }
 //        }
+        binding.lockerLoginTv.setOnClickListener {
+            startActivity(Intent(activity, LoginActivity::class.java))
+        }
         binding.lockerSelectAllLl.setOnClickListener {
             toggleBottomSheet()
         }
 
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        initViews()
+    }
+
+    private fun getJwt(): Int {
+        val spf = activity?.getSharedPreferences("auth", AppCompatActivity.MODE_PRIVATE)
+        return spf!!.getInt("jwt", 0)
+    }
+
+    // 뷰의 텍스를 로그인인지 로그아웃인지 결정
+    private fun initViews() {
+        val jwt: Int = getJwt()
+        if (jwt == 0) {
+            binding.lockerLoginTv.text = "로그인"
+            binding.lockerLoginTv.setOnClickListener {
+                startActivity(Intent(activity, LoginActivity::class.java))
+            }
+        } else {
+            binding.lockerLoginTv.text = "로그아웃"
+            binding.lockerLoginTv.setOnClickListener {
+                // 로그아웃 진행
+                logout()
+                startActivity(Intent(activity, MainActivity::class.java))
+            }
+        }
+    }
+
+    // 로그아웃 하는 함수
+    private fun logout() {
+        val spf = activity?.getSharedPreferences("auth", AppCompatActivity.MODE_PRIVATE)
+        val editor = spf!!.edit()
+        editor.remove("jwt") // jwt 의 키 값을 없애줌
+        editor.apply()
     }
 
     private fun toggleBottomSheet() {

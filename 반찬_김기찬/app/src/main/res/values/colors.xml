@@ -19,4 +19,6 @@
     <color name="gray_color">#a8a8a8</color>
     <color name="song_player_bg">#a8a8a8</color>
     <color name="default_color">#757575</color>
+
+    <color name="form_error">#F11818</color>
 </resources>

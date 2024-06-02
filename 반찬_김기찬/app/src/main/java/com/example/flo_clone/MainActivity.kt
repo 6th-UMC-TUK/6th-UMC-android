@@ -130,7 +130,7 @@ class MainActivity : AppCompatActivity() {
                 val currentProgress = mediaPlayer!!.currentPosition / 1000
                 val totalDuration = songs[nowPos].playTime
 
-                if (currentProgress >= totalDuration) {
+                if (currentProgress +1 >= totalDuration) {
                     // 현재 노래가 종료되었으므로 다음 노래로 이동
                     moveSong(+1)
                 } else {
@@ -218,6 +218,7 @@ class MainActivity : AppCompatActivity() {
         setPlayerStatus(song.isPlaying)
     }
 
+    // 현재 재생 정보를 저장해두는 역할
     override fun onPause() {
         super.onPause()
         Log.d("pause", "pause 발생")
@@ -236,11 +237,21 @@ class MainActivity : AppCompatActivity() {
     // 사용자가 포커스를 잃으면 미디어 플레이어 해제
     override fun onStop() {
         super.onStop()
+        Log.d("onStop", "onstop발생")
+
+        songs[nowPos].second = binding.mainSeekbarSb.progress / 1000
+
+        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putInt("songSecond", songs[nowPos].second)
+        editor.putInt("songId", songs[nowPos].id)
+
+        editor.apply()
         mediaPlayer?.release() // 미디어 플레이어가 갖고 있던 리소스 해제
         mediaPlayer = null // 미디어 플레이어 해제
     }
 
-
+    // 더미 데이터 삽입
     private fun inputDummySongs() {
         val songDB = SongDatabase.getInstance(this)!!
         val songs = songDB.songDao().getSongs()

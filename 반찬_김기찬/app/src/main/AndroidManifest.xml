@@ -25,6 +25,8 @@
         <activity
             android:name="com.example.flo_clone.Song.SongActivity">
         </activity>
+        <activity android:name=".Login.SignUpActivity"/>
+        <activity android:name=".Login.LoginActivity"/>
     </application>
 
 </manifest>
