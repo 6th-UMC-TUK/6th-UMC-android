@@ -20,6 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/fragment_locker_loginTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="로그인"
@@ -38,7 +39,7 @@
         app:tabBackground="@drawable/tab_indicator"
         app:tabIndicatorColor="@drawable/btm_color_selector"
         app:tabIndicatorFullWidth="false"
-        app:tabSelectedTextColor="@color/select_color"
+        app:tabSelectedTextColor="@color/unselect_color"
         app:tabTextColor="@color/black"
         app:tabTextAppearance="@style/locker_tab_text"
         app:tabGravity="start"/>

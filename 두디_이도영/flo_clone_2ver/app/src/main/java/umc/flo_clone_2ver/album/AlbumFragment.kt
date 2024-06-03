@@ -1,15 +1,17 @@
 package umc.flo_clone_2ver.album
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
 import umc.flo_clone_2ver.R
 import umc.flo_clone_2ver.adapter.ViewPagerFragmentAdapter
 import umc.flo_clone_2ver.adapter.ViewPagerFragmentAdapter.Companion.ALBUM
 import umc.flo_clone_2ver.data.Album
+import umc.flo_clone_2ver.data.Like
 import umc.flo_clone_2ver.data.MUSIC_SINGER
 import umc.flo_clone_2ver.data.MUSIC_TITLE
 import umc.flo_clone_2ver.data.SONG_ALBUM_INDEX
@@ -21,6 +23,7 @@ class AlbumFragment: Fragment() {
     private lateinit var musicTitle: String
     private lateinit var musicSinger: String
     private lateinit var album: Album
+    private var isLiked: Boolean = false
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,10 +35,13 @@ class AlbumFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initView()
+        isLiked = isLikedAlbum(album.id)
+        setInit()
         initViewPager2()
         binding.albumPreviousBtn.setOnClickListener {
             parentFragmentManager.popBackStack()
         }
+        setOnClickListeners(album)
     }
 
     private fun initView(){
@@ -65,5 +71,51 @@ class AlbumFragment: Fragment() {
                 else -> "영상"
             }
         }.attach()
+    }
+
+    private fun setInit(){
+        binding.fragmentAlbumLikeBtn.setImageResource(if(isLiked) R.drawable.ic_my_like_on
+        else R.drawable.ic_my_like_off)
+    }
+
+    private fun getJwt():Int{
+        val spf = activity?.getSharedPreferences("auth", AppCompatActivity.MODE_PRIVATE)
+        return spf!!.getInt("jwt", 0)
+    }
+
+    private fun likeAlbum(userId: Int, albumId: Int){
+        val songDB = SongDatabase.getInstance(requireContext())!!
+        val like = Like(userId, albumId)
+
+        songDB.AlbumDao().likeAlbum(like)
+    }
+
+    private fun isLikedAlbum(albumId: Int): Boolean{
+        val songDB = SongDatabase.getInstance(requireContext())!!
+        val userId = getJwt()
+
+        val likeId: Int? = songDB.AlbumDao().isLikedAlbum(userId, albumId)
+
+        return likeId != null
+    }
+
+    private fun disLikedAlbum(albumId: Int){
+        val songDB = SongDatabase.getInstance(requireContext())!!
+        val userId = getJwt()
+
+        songDB.AlbumDao().disLikedAlbum(userId, albumId)
+    }
+
+    private fun setOnClickListeners(album: Album){
+        val userId = getJwt()
+        binding.fragmentAlbumLikeBtn.setOnClickListener {
+            if(isLiked){
+                binding.fragmentAlbumLikeBtn.setImageResource(R.drawable.ic_my_like_off)
+                disLikedAlbum(album.id)
+            } else{
+                binding.fragmentAlbumLikeBtn.setImageResource(R.drawable.ic_my_like_on)
+                likeAlbum(userId, album.id)
+            }
+        }
     }
 }

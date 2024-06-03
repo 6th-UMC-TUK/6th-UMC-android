@@ -1,16 +1,15 @@
 package umc.flo_clone_2ver.presentation
 
-import android.content.Intent
+import android.content.*
 import android.media.MediaPlayer
+import android.media.tv.TvContract.Programs.Genres.MUSIC
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -19,7 +18,6 @@ import umc.flo_clone_2ver.R
 import umc.flo_clone_2ver.data.Album
 import umc.flo_clone_2ver.data.CURRENT_POSITION
 import umc.flo_clone_2ver.data.IS_PLAYING
-import umc.flo_clone_2ver.data.MUSIC
 import umc.flo_clone_2ver.data.MUSIC_SINGER
 import umc.flo_clone_2ver.data.MUSIC_TITLE
 import umc.flo_clone_2ver.data.SECOND
@@ -30,6 +28,10 @@ import umc.flo_clone_2ver.data.Song
 import umc.flo_clone_2ver.data.SongDatabase
 import umc.flo_clone_2ver.databinding.ActivityMainBinding
 import umc.flo_clone_2ver.locker.LockerFragment
+import umc.flo_clone_2ver.presentation.LookFragment
+import umc.flo_clone_2ver.presentation.SearchFragment
+import umc.flo_clone_2ver.presentation.SongActivity
+import umc.mission.floclone.HomeFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

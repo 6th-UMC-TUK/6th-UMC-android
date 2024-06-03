@@ -1,4 +1,4 @@
-package umc.flo_clone_2ver.presentation
+package umc.mission.floclone
 
 import android.os.Bundle
 import android.os.Handler
@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import kotlinx.coroutines.Runnable
 import umc.flo_clone_2ver.R
 import umc.flo_clone_2ver.adapter.HomeViewPagerAdapter
 import umc.flo_clone_2ver.adapter.HomeViewPagerAdapter.Companion.ADD
@@ -26,6 +27,8 @@ import umc.flo_clone_2ver.data.SONG_ALBUM_INDEX
 import umc.flo_clone_2ver.data.Song
 import umc.flo_clone_2ver.data.SongDatabase
 import umc.flo_clone_2ver.databinding.FragmentHomeBinding
+import umc.flo_clone_2ver.presentation.HomeBannerFragment
+
 
 class HomeFragment : Fragment(), NewMusicDailyAdapter.ItemClickListener {
     private lateinit var homeViewPagerAdapter: HomeViewPagerAdapter
@@ -36,7 +39,7 @@ class HomeFragment : Fragment(), NewMusicDailyAdapter.ItemClickListener {
     private lateinit var homeViewPager2List: MutableList<Int>
     private lateinit var binding: FragmentHomeBinding
     private val sliderHandler: Handler = Handler()
-    private val sliderRunnable = kotlinx.coroutines.Runnable {
+    private val sliderRunnable = Runnable {
         if (binding.homeBannerViewpager2.currentItem == 3)
             binding.homeBannerViewpager2.currentItem = 0
         else {
