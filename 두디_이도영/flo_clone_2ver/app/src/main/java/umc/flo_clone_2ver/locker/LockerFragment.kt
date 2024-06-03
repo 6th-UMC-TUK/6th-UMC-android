@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.tabs.TabLayoutMediator
-import umc.flo_clone_2ver.adapter.ViewPagerFragmentAdapter
-import umc.flo_clone_2ver.adapter.ViewPagerFragmentAdapter.Companion.LOCKER
+import umc.flo_clone_2ver.adapter.ViewpagerFragmentAdapter
+import umc.flo_clone_2ver.adapter.ViewpagerFragmentAdapter.Companion.LOCKER
 import umc.flo_clone_2ver.databinding.FragmentLockerBinding
 import umc.flo_clone_2ver.login.LoginActivity
 import umc.flo_clone_2ver.presentation.MainActivity
@@ -33,7 +33,7 @@ class LockerFragment : Fragment() {
         initViewPager2()
     }
     private fun initViewPager2() {
-        val fragmentStateAdapter = ViewPagerFragmentAdapter(this, LOCKER)
+        val fragmentStateAdapter = ViewpagerFragmentAdapter(this, LOCKER)
         binding.fragmentLockerViewpager2.adapter = fragmentStateAdapter
         TabLayoutMediator(
             binding.fragmentLockerTablayout,
@@ -42,7 +42,8 @@ class LockerFragment : Fragment() {
             binding.fragmentLockerViewpager2.currentItem = tab.position
             tab.text = when (position) {
                 0 -> "저장한 곡"
-                else -> "음악파일"
+                1 -> "음악파일"
+                else -> "저장앨범"
             }
         }.attach()
 

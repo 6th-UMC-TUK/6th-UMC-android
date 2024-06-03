@@ -8,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
 import umc.flo_clone_2ver.R
-import umc.flo_clone_2ver.adapter.ViewPagerFragmentAdapter
-import umc.flo_clone_2ver.adapter.ViewPagerFragmentAdapter.Companion.ALBUM
+import umc.flo_clone_2ver.adapter.ViewpagerFragmentAdapter
+import umc.flo_clone_2ver.adapter.ViewpagerFragmentAdapter.Companion.ALBUM
 import umc.flo_clone_2ver.data.Album
 import umc.flo_clone_2ver.data.Like
 import umc.flo_clone_2ver.data.MUSIC_SINGER
@@ -61,7 +61,7 @@ class AlbumFragment: Fragment() {
         //bundle.putString(MUSIC_TITLE, musicTitle)
         //bundle.putString(MUSIC_SINGER, musicSinger)
         bundle.putInt(SONG_ALBUM_INDEX, album.id)
-        val fragmentStateAdapter = ViewPagerFragmentAdapter(this, ALBUM, bundle)
+        val fragmentStateAdapter = ViewpagerFragmentAdapter(this, ALBUM, bundle)
         binding.albumViewpager2.adapter = fragmentStateAdapter
         TabLayoutMediator(binding.albumTablayout, binding.albumViewpager2) { tab, position ->
             binding.albumViewpager2.currentItem = tab.position
