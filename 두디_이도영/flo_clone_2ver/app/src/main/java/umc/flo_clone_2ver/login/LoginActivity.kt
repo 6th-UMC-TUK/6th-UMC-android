@@ -10,10 +10,14 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import umc.flo_clone_2ver.R
 import umc.flo_clone_2ver.data.SongDatabase
+import umc.flo_clone_2ver.data.User
 import umc.flo_clone_2ver.databinding.ActivityLoginBinding
 import umc.flo_clone_2ver.presentation.MainActivity
+import umc.flo_clone_2ver.retrofit.AuthService
+import umc.flo_clone_2ver.retrofit.LoginView
+import umc.flo_clone_2ver.retrofit.Result
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity(), LoginView {
     lateinit var binding: ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,22 +51,44 @@ class LoginActivity : AppCompatActivity() {
 
         user?.let{
             Log.d("Login_ACT/GET_USER", "userId: ${user.id}, $user")
-            saveJwt(user.id)
+//            saveJwt(user.id)
             startMainActivity()
         }
         Toast.makeText(this, "회원 정보가 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
     }
 
-    private fun saveJwt(jwt: Int){
-        val spf = getSharedPreferences("auth", MODE_PRIVATE)
+
+//    private fun saveJwt(jwt: Int){
+//        val spf = getSharedPreferences("auth", MODE_PRIVATE)
+//        val editor = spf.edit()
+//
+//        editor.putInt("jwt", jwt)
+//        editor.apply()
+//    }
+
+    private fun saveJwt2(jwt: String){
+        val spf = getSharedPreferences("auth2", MODE_PRIVATE)
         val editor = spf.edit()
 
-        editor.putInt("jwt", jwt)
+        editor.putString("jwt", jwt)
         editor.apply()
     }
 
     private fun startMainActivity(){
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+    }
+
+    override fun onLoginSuccess(code: Int, result: Result) {
+        when(code){
+            1000 -> {
+                saveJwt2(result.jwt)
+                startMainActivity()
+            }
+        }
+    }
+
+    override fun onLoginFailure() {
+
     }
 }

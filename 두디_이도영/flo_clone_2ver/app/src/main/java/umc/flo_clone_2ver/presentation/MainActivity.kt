@@ -85,6 +85,14 @@ class MainActivity : AppCompatActivity() {
         R.drawable.img_album_exp3, false, "I'm addicted\n끊임없이", 1
         ))
         songDB.songDao().removeSong(7)*/
+
+        Log.d("Main/JWT_TO_SERVER", getJwt().toString())
+    }
+
+    private fun getJwt(): String?{
+        val spf = this.getSharedPreferences("auth2", AppCompatActivity.MODE_PRIVATE)
+
+        return spf!!.getString("jwt", "")
     }
 
     private fun initBottomNavigation() {
