@@ -138,7 +138,6 @@ class SongActivity : AppCompatActivity() {
         songDB.songDao().updateIsLikeById(songs[newPos].isLike, songs[newPos].id)
     }
 
-
     private fun initClickListener() {
         binding.activitySongPlayerPlayBtn.setOnClickListener {
             setPlayerStatus(true)

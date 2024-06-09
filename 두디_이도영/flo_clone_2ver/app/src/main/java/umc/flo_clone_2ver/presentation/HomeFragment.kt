@@ -246,7 +246,6 @@ class HomeFragment : Fragment(), NewMusicDailyAdapter.ItemClickListener {
     }
 
     override fun onRemove(position: Int) {
-        TODO("Not yet implemented")
     }
 
     override fun onResume() {

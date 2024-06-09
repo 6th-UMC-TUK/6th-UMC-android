@@ -26,7 +26,7 @@ import umc.flo_clone_2ver.retrofit.AuthService
 import umc.flo_clone_2ver.retrofit.SignUpView
 
 class SignUpActivity : AppCompatActivity(), SignUpView {
-    lateinit var binding: ActivitySignUpBinding
+    private lateinit var binding: ActivitySignUpBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +36,6 @@ class SignUpActivity : AppCompatActivity(), SignUpView {
 
         binding.signUpSignUpBtn.setOnClickListener {
             signUp()
-            finish()
         }
     }
 
@@ -88,13 +87,16 @@ class SignUpActivity : AppCompatActivity(), SignUpView {
 
         authService.signUp(getUser())
         // API 호출
+
     }
 
     override fun onSignUpSuccess(){
+        binding.signUpLoadingPb.visibility = View.GONE
         finish()
     }
 
-    override fun onSignUpFailure() {
-
+    override fun onSignUpFailure(respMessage: String) {
+        binding.signUpEmailErrorTv.visibility = View.VISIBLE
+        binding.signUpEmailErrorTv.text = respMessage
     }
 }
