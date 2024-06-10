@@ -102,7 +102,6 @@ class SavedSongFragment : Fragment(), NewMusicDailyAdapter.ItemClickListener {
             if (songList.isNotEmpty()) {
                 songList.forEach {
                     songDB.songDao().updateIsLikeById(false, it.id)
-                    //Log.d("bottomsheet", it.toString())
                 }
                 addSongs()
                 newMusicDailyAdapter.submitList(songList)

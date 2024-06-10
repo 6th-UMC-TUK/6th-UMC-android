@@ -46,7 +46,6 @@ class AlbumBSideTrackFragment: Fragment() {
         binding.albumBSideTrackRecyclerview.adapter = NewMusicDailyAdapter(B_SIDE_TRACK).apply {
             submitList(songs)
         }
-
     }
 
     private fun updateView(){

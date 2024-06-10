@@ -2,6 +2,7 @@ package umc.flo_clone_2ver.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "SongTable")
 data class Song(

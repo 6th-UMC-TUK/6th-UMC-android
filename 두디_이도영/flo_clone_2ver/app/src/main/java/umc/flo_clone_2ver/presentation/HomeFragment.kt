@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import kotlinx.coroutines.Runnable
 import umc.flo_clone_2ver.R
 import umc.flo_clone_2ver.adapter.HomeViewPagerAdapter
 import umc.flo_clone_2ver.adapter.HomeViewPagerAdapter.Companion.ADD
@@ -17,11 +18,12 @@ import umc.flo_clone_2ver.adapter.NewMusicDailyAdapter
 import umc.flo_clone_2ver.adapter.NewMusicDailyAdapter.Companion.NEW_MUSIC_DAILY
 import umc.flo_clone_2ver.adapter.NewMusicDailyAdapter.Companion.PLAY_BTN
 import umc.flo_clone_2ver.adapter.NewMusicDailyAdapter.Companion.VIDEO_COLLECTION
-import umc.flo_clone_2ver.adapter.ViewPagerFragmentAdapter
-import umc.flo_clone_2ver.adapter.ViewPagerFragmentAdapter.Companion.HOME
+import umc.flo_clone_2ver.adapter.ViewpagerFragmentAdapter
+import umc.flo_clone_2ver.adapter.ViewpagerFragmentAdapter.Companion.HOME
 import umc.flo_clone_2ver.album.AlbumFragment
 import umc.flo_clone_2ver.data.ALBUM_FRAGMENT
 import umc.flo_clone_2ver.data.MUSIC
+import umc.flo_clone_2ver.data.Music
 import umc.flo_clone_2ver.data.SONG_ALBUM_INDEX
 import umc.flo_clone_2ver.data.Song
 import umc.flo_clone_2ver.data.SongDatabase
@@ -36,7 +38,7 @@ class HomeFragment : Fragment(), NewMusicDailyAdapter.ItemClickListener {
     private lateinit var homeViewPager2List: MutableList<Int>
     private lateinit var binding: FragmentHomeBinding
     private val sliderHandler: Handler = Handler()
-    private val sliderRunnable = kotlinx.coroutines.Runnable {
+    private val sliderRunnable = Runnable {
         if (binding.homeBannerViewpager2.currentItem == 3)
             binding.homeBannerViewpager2.currentItem = 0
         else {
@@ -67,26 +69,27 @@ class HomeFragment : Fragment(), NewMusicDailyAdapter.ItemClickListener {
 
     private fun makeDummyData() {
         songList = mutableListOf(
-            Song("Next Level", "aespa", 0, 222, false, "music_nextlevel",
+            Song("Next Level", "aespa", 0, 222, false, "music_bboom",
                 R.drawable.img_album_exp3, false,"I'm on the Next Level Yeah\n절대적 룰을 지켜", 1),
             Song("작은 것들을 위한 시", "방탄소년단", 0, 229, false, "music_lilac",
                 R.drawable.img_album_exp4, false, "모든 게 궁금해\nHow's your day", 2),
-            Song("BAAM", "모모랜드 (MOMOLAND)", 0, 208, false, "music_nextlevel",
+            Song("BAAM", "모모랜드 (MOMOLAND)", 0, 208, false, "music_boy",
                 R.drawable.img_album_exp5, false, "Bae Bae Bae BAAM BAAM\nBae Bae Bae BAAM BAAM", 3),
-            Song("Weekend", "태연", 0, 234, false, "music_nextlevel",
+            Song("Weekend", "태연", 0, 234, false, "music_butter",
                 R.drawable.img_album_exp6, false, "가장 가까운 바다\n혼자만의 영화관", 4)
         )
         podcastList = mutableListOf(
-            Song("제목", "가수", R.drawable.img_potcast_exp),
-            Song("제목", "가수", R.drawable.img_potcast_exp),
-            Song("제목", "가수", R.drawable.img_potcast_exp),
-            Song("제목", "가수", R.drawable.img_potcast_exp)
+            Song("제목", "가수", 0, 0, false, "", R.drawable.img_potcast_exp),
+            Song("제목", "가수", 0, 0, false, "", R.drawable.img_potcast_exp),
+            Song("제목", "가수", 0, 0, false, "", R.drawable.img_potcast_exp),
+            Song("제목", "가수", 0, 0, false, "", R.drawable.img_potcast_exp)
+
         )
         videoCollectionList = mutableListOf(
-            Song("제목", "가수", R.drawable.img_video_exp),
-            Song("제목", "가수", R.drawable.img_video_exp),
-            Song("제목", "가수", R.drawable.img_video_exp),
-            Song("제목", "가수", R.drawable.img_video_exp)
+            Song("제목", "가수",0, 0, false, "", R.drawable.img_video_exp),
+            Song("제목", "가수",0, 0, false, "", R.drawable.img_video_exp),
+            Song("제목", "가수",0, 0, false, "", R.drawable.img_video_exp),
+            Song("제목", "가수",0, 0, false, "", R.drawable.img_video_exp)
         )
         homeViewPager1List = mutableListOf(
             R.drawable.img_home_viewpager_exp,
@@ -123,7 +126,7 @@ class HomeFragment : Fragment(), NewMusicDailyAdapter.ItemClickListener {
         homeViewPagerAdapter = HomeViewPagerAdapter(homeViewPager2List, ADD)
         binding.homeAdViewpager2.adapter = homeViewPagerAdapter
 
-        val bannerViewPagerAdapter = ViewPagerFragmentAdapter(this, HOME)
+        val bannerViewPagerAdapter = ViewpagerFragmentAdapter(this, HOME)
         bannerViewPagerAdapter.addFragment(HomeBannerFragment("포근하게 덮어주는 꿈의\n목소리"))
         bannerViewPagerAdapter.addFragment(HomeBannerFragment("복잡한 머릿속을\n비워주는 잔잔한 팝"))
         bannerViewPagerAdapter.addFragment(HomeBannerFragment("아무 생각이 나지 않는\n밤엔 인디팝"))
@@ -243,7 +246,6 @@ class HomeFragment : Fragment(), NewMusicDailyAdapter.ItemClickListener {
     }
 
     override fun onRemove(position: Int) {
-        TODO("Not yet implemented")
     }
 
     override fun onResume() {
