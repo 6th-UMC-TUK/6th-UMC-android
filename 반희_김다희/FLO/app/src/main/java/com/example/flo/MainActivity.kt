@@ -10,11 +10,9 @@ import android.view.View
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.flo.album.Album
 import com.example.flo.databinding.ActivityMainBinding
 import com.example.flo.home.HomeFragment
 import com.example.flo.locker.LockerFragment
-import com.example.flo.look.LookFragment
 import com.example.flo.search.SearchFragment
 import com.example.flo.song.Song
 import com.example.flo.song.SongActivity
@@ -61,6 +59,14 @@ class MainActivity : AppCompatActivity() {
 
         initClickListener()
         initBottomNavigation()
+
+        Log.d("MAIN/JWT_TO_SERVER", getJwt().toString())
+    }
+
+    private fun getJwt(): String? {
+        val spf = this.getSharedPreferences("auth2", AppCompatActivity.MODE_PRIVATE)
+
+        return spf!!.getString("jwt", "")
     }
 
     override fun onStart() {
