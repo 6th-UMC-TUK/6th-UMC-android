@@ -40,6 +40,8 @@ class LoginActivity: AppCompatActivity() {
         val email: String = binding.loginIdEt.text.toString() + "@" + binding.loginDirectInputEt.text.toString()
         val pwd: String = binding.loginPasswordEt.text.toString()
 
+        val by: String = "에베베베베베베베"
+
         val songDB = SongDatabase.getInstance(this)!!
         val user = songDB.userDao().getUser(email, pwd)
 
