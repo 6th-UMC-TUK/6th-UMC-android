@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.flo_clone.Api.AuthService
+import com.example.flo_clone.Api.Result
 import com.example.flo_clone.Function.CustomSnackbar
 import com.example.flo_clone.MainActivity
 import com.example.flo_clone.Song.SongDatabase
 import com.example.flo_clone.databinding.ActivityLoginBinding
 
-class LoginActivity: AppCompatActivity() {
+class LoginActivity: AppCompatActivity(), LoginView {
     lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,24 +42,37 @@ class LoginActivity: AppCompatActivity() {
         val email: String = binding.loginIdEt.text.toString() + "@" + binding.loginDirectInputEt.text.toString()
         val pwd: String = binding.loginPasswordEt.text.toString()
 
-        val by: String = "에베베베베베베베"
 
-        val songDB = SongDatabase.getInstance(this)!!
-        val user = songDB.userDao().getUser(email, pwd)
+//        val songDB = SongDatabase.getInstance(this)!!
+//        val user = songDB.userDao().getUser(email, pwd)
+//
+//        user?.let {
+//            Log.d("Login_Act/Get_User", "userId : ${user.id}, $user") // user 의 모든 정보를 보여줌
+////            saveJwt(user.id)
+//            startMainActivity()
+//        }
 
-        user?.let {
-            Log.d("Login_Act/Get_User", "userId : ${user.id}, $user") // user 의 모든 정보를 보여줌
-            saveJwt(user.id)
-            startMainActivity()
-        }
         CustomSnackbar.make(binding.root, "회원 정보가 존재하지 않습니다.").show()
+
+        val authService = AuthService()
+        authService.setLoginView(this)
+
+        authService.login(User(email, password, ""))
     }
 
-    private fun saveJwt(jwt: Int) {
-        val spf = getSharedPreferences("auth", MODE_PRIVATE)
+//    private fun saveJwt(jwt: Int) {
+//        val spf = getSharedPreferences("auth", MODE_PRIVATE)
+//        val editor = spf.edit()
+//
+//        editor.putInt("jwt", jwt)
+//        editor.apply()
+//    }
+
+    private fun saveJwt2(jwt: String) {
+        val spf = getSharedPreferences("auth2" , MODE_PRIVATE)
         val editor = spf.edit()
 
-        editor.putInt("jwt", jwt)
+        editor.putString("jwt", jwt)
         editor.apply()
     }
 
@@ -66,5 +81,19 @@ class LoginActivity: AppCompatActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         CustomSnackbar.make(binding.root, "환영합니다.").show()
+    }
+
+    override fun onLoginSuccess(code: Int, result: Result) {
+        when(code) {
+            1000 -> {
+                saveJwt2(result.jwt)
+                startMainActivity()
+
+            }
+        }
+    }
+
+    override fun onLoginFailure() {
+
     }
 }
