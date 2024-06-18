@@ -52,6 +52,8 @@ class LoginActivity: AppCompatActivity(), LoginView {
 //            startMainActivity()
 //        }
 
+        val st = "김기찬 배신자"
+
         CustomSnackbar.make(binding.root, "회원 정보가 존재하지 않습니다.").show()
 
         val authService = AuthService()
