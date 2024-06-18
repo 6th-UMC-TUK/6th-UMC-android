@@ -42,6 +42,7 @@ class LoginActivity: AppCompatActivity(), LoginView {
         val email: String = binding.loginIdEt.text.toString() + "@" + binding.loginDirectInputEt.text.toString()
         val pwd: String = binding.loginPasswordEt.text.toString()
 
+
 //        val songDB = SongDatabase.getInstance(this)!!
 //        val user = songDB.userDao().getUser(email, pwd)
 //
@@ -50,6 +51,7 @@ class LoginActivity: AppCompatActivity(), LoginView {
 ////            saveJwt(user.id)
 //            startMainActivity()
 //        }
+
         CustomSnackbar.make(binding.root, "회원 정보가 존재하지 않습니다.").show()
 
         val authService = AuthService()

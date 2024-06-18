@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
@@ -312,6 +313,13 @@ class MainActivity : AppCompatActivity() {
         if(songs.isNotEmpty()) return
         songList.forEach {
             songDB.songDao().insert(it)
+        }
+    }
+    companion object{
+
+        private lateinit var context: Context
+        fun getString(@StringRes stringResId: Int): String {
+            return context.getString(stringResId)
         }
     }
 }
