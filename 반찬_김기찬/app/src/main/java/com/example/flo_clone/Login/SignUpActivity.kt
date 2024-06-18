@@ -4,12 +4,17 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.flo_clone.Api.AuthResponse
+import com.example.flo_clone.Api.AuthRetrofitInterface
+import com.example.flo_clone.Api.AuthService
+import com.example.flo_clone.Api.getRetrofit
 import com.example.flo_clone.Function.CustomSnackbar
 import com.example.flo_clone.Song.SongDatabase
 import com.example.flo_clone.databinding.ActivitySignupBinding
 import com.google.android.material.snackbar.Snackbar
+import javax.security.auth.callback.Callback
 
-class SignUpActivity: AppCompatActivity() {
+class SignUpActivity: AppCompatActivity(), SignUpView {
     lateinit var binding: ActivitySignupBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,8 +32,9 @@ class SignUpActivity: AppCompatActivity() {
     private fun getUser(): User {
         var email: String = binding.signUpIdEt.text.toString() + "@" + binding.signUpDirectInputEt.text.toString()
         val pwd: String = binding.signUpPasswordEt.text.toString()
+        var name : String = binding.signUpNameEt.text.toString()
 
-        return User(email, pwd)
+        return User(email, pwd, name)
     }
 
     // 회원가입을 진행하는 함수
@@ -63,6 +69,19 @@ class SignUpActivity: AppCompatActivity() {
         val users = userDB.userDao().getUsers() // 회원가입 정보가 잘 들어갔는지
         Log.d("SignUpAct", users.toString())
 
+        val authService = AuthService()
+        authService.setSignUpView(this)
+
+        authService.signUp(getUser())
+
         return true
+    }
+
+    override fun onSignUpSuccess() {
+        finish()
+    }
+
+    override fun onSignUpFailure() {
+
     }
 }
