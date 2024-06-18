@@ -16,11 +16,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-//        maven { url; "https://devrepo.kakao.com/nexus/content/groups/public/"}
         maven { url = java.net.URI("https://devrepo.kakao.com/nexus/content/groups/public/") }
     }
 }
 
-rootProject.name = "flo_clone_2ver"
+rootProject.name = "kakaoLogin"
 include(":app")
  
